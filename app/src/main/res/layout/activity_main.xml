@@ -8,25 +8,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.healthstore.app.MainActivity">
+    tools:context="com.healthstore.app.activity.MainActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!" />
-
-    <Button
-        android:id="@+id/btn_test_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="测试按钮一"/>
-    <Button
-        android:id="@+id/btn_test_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_test_1"
-        android:layout_centerInParent="true"
-        android:text="测试按钮二"/>
 
 </RelativeLayout>

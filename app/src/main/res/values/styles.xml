@@ -1,14 +1,10 @@
 <resources>
-
-
-    <!-- Base application theme. -->
-    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
-    <!-- Customize your theme here. -->
-        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
-        <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
-        <!--<item name="colorAccent">@color/colorAccent</item>-->
-    <!--</style>-->
-
-    <style name="AppTheme" parent="QMUI.Compat.NoActionBar"></style>
-
+    <style name="AppTheme" parent="QMUI.Compat">
+        <!-- 配置qmui提供的theme -->
+        <!--<item name="qmui_round_btn_text_size">@dimen/qmui_btn_text_size</item>-->
+        <!--<item name="qmui_round_btn_border_width">@dimen/qmui_btn_border_width</item>-->
+        <item name="qmui_round_btn_bg_color">@color/qmui_config_color_red</item>
+        <!--<item name="qmui_round_btn_border_color">@color/qmui_btn_blue_border</item>-->
+        <!--<item name="qmui_round_btn_text_color">@color/qmui_btn_blue_text</item>-->
+    </style>
 </resources>

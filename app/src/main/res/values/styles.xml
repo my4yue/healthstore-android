@@ -6,5 +6,24 @@
         <!--<item name="qmui_round_btn_bg_color">@android:color/black</item>-->
         <item name="qmui_round_btn_border_color">@android:color/black</item>
         <item name="qmui_round_btn_text_color">@android:color/black</item>
+
+
+        <!--<item name="qmui_topbar_height">56dp</item>-->
+        <item name="QMUITopBarStyle">@style/AppTopBar</item>
+
+    </style>
+
+    <style name="AppTopBar" parent="QMUI.TopBar">
+        <item name="qmui_topbar_bg_color">@android:color/black</item>
+        <item name="qmui_topbar_title_color">@android:color/white</item>
+        <item name="qmui_topbar_subtitle_color">@android:color/white</item>
+        <!--<item name="qmui_topbar_text_btn_color_state_list">@color/s_topbar_btn_color</item>-->
+        <item name="qmui_topbar_height">48dp</item>
+        <item name="qmui_topbar_image_btn_height">48dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+
+        <item name="qmui_topbar_separator_height">0px</item>
+
     </style>
 </resources>

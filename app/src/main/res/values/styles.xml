@@ -1,4 +1,5 @@
 <resources>
+
     <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
         <!-- 配置qmui提供的theme -->
         <!--<item name="qmui_round_btn_text_size">@dimen/qmui_btn_text_size</item>-->
@@ -24,6 +25,16 @@
         <item name="android:paddingRight">0dp</item>
 
         <item name="qmui_topbar_separator_height">0px</item>
-
     </style>
+
+    <!--&lt;!&ndash; Override standard Transitions with a Style &ndash;&gt;-->
+    <style name="MyTransitionStyle">
+        <item name="android:fragmentFadeEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:fragmentFadeExitAnimation">@anim/slide_in_left</item>
+        <item name="android:fragmentOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:fragmentOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:fragmentCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:fragmentCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
 </resources>

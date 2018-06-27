@@ -1,6 +1,18 @@
 <resources>
-    <string name="app_name">Healthstore</string>
+    <string name="app_name">惠尔仕健康</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="submit">提交</string>
+
+    <string name="feedback_title">反馈</string>
+    <string name="feedback_edit_hint">期待您的反馈，不超过200字</string>
+
+    <string-array name="me_function_name">
+        <item>会员卡</item>
+        <item>会籍资料</item>
+        <item>惠尔仕商城</item>
+        <item>我的设备</item>
+        <item>反馈</item>
+        <item>设置</item>
+    </string-array>
+
 </resources>

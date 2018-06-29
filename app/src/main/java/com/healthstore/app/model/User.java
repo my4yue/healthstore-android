@@ -2,7 +2,8 @@ package com.healthstore.app.model;
 
 public class User {
 
-    String name;
-    String password;
+    long id;
+    String userName;
+    String watchword;
 
 }

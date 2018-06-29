@@ -61,6 +61,9 @@ public class MainActivity extends HealthAppActivity {
         fragments.add(new MeFragment());
 
         onSelected(tabAgenda);
+
+
+
     }
 
     @OnClick({R.id.tab_agenda, R.id.tab_expert, R.id.tab_health, R.id.tab_me})

@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import com.healthstore.app.R;
 import com.healthstore.app.helper.LogHelper;
+import com.healthstore.app.presenter.impl.UserPresenterImpl;
 import com.healthstore.app.view.fragment.MeFragment;
 import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,7 +64,11 @@ public class MainActivity extends HealthAppActivity {
 
         onSelected(tabAgenda);
 
-
+        try {
+            new UserPresenterImpl().getUser();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

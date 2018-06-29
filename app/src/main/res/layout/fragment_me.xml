@@ -6,32 +6,41 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <com.qmuiteam.qmui.widget.QMUIRadiusImageView
-        android:id="@+id/icon"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center_horizontal"
-        android:clickable="false"
-        android:src="@mipmap/head_show"
-        android:layout_marginTop="30dp"
-        app:qmui_is_circle="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/icon"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="风之幽水"
-        android:textSize="18dp"
-        android:textColor="@android:color/white" />
+        android:background="@color/qmui_config_color_black"
+        android:orientation="vertical">
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/icon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:clickable="false"
+            android:src="@mipmap/head_show"
+            app:qmui_is_circle="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/icon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:text="风之幽水"
+            android:textColor="@android:color/white"
+            android:textSize="18dp" />
+
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/app_grey">
+        android:background="@color/app_grey"
+        android:orientation="vertical">
 
         <Space
             android:layout_width="match_parent"
@@ -42,8 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
-            android:foreground="@drawable/rect"
-            />
+            android:foreground="@drawable/rect_with_border" />
 
     </LinearLayout>
 

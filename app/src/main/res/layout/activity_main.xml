@@ -1,20 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@color/app_color_primary"
+    >
 
     <FrameLayout
-        android:layout_above="@id/tab_bar"
         android:id="@+id/content_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/app_color_primary"/>
+        android:background="@color/qmui_config_color_white"
+        />
 
-    <View
-        android:id="@+id/tab_bar"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/darker_gray" />
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:background="@color/qmui_config_color_black"
+        android:orientation="horizontal"
+        android:paddingTop="8dp">
 
-</RelativeLayout>
+        <TextView
+            style="@style/TabTextView"
+            android:id="@+id/tab_agenda"
+            android:tag="0"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/agenda"
+            android:text="日程"/>
+        <TextView
+            style="@style/TabTextView"
+            android:tag="1"
+            android:id="@+id/tab_expert"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/expert"
+            android:text="专家指导"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"/>
+
+        <TextView
+            style="@style/TabTextView"
+            android:id="@+id/tab_health"
+            android:tag="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/health"
+            android:text="健康档案"/>
+        <TextView
+            style="@style/TabTextView"
+            android:tag="3"
+            android:id="@+id/tab_me"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/me"
+            android:text="我的"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@drawable/oval_with_border"/>
+
+    <com.qmuiteam.qmui.alpha.QMUIAlphaImageButton
+        android:id="@+id/btn_add_record"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:background="@mipmap/action_add"/>
+
+
+</FrameLayout>

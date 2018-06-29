@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape
+            android:shape="oval">
+            <stroke
+                android:width="8dp"
+                android:color="@color/qmui_config_color_black" />
+            <solid android:color="@color/app_grey" />
+        </shape>
+    </item>
+
+
+
+</layer-list>

@@ -4,7 +4,6 @@ package com.healthstore.app.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.healthstore.app.R;
+import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,15 +23,23 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MeFragment extends Fragment {
+public class MeFragment extends BaseFragment {
 
     @BindView(R.id.recycler) RecyclerView recyclerView;
+    @BindView(R.id.icon) QMUIRadiusImageView iconView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_me, null);
         ButterKnife.bind(this, view);
+
+        iconView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentController().startFragment(new MeUserFragment());
+            }
+        });
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         recyclerView.setAdapter(new MeRecyclerViewAdapter());
@@ -64,12 +72,7 @@ public class MeFragment extends Fragment {
                 public void onClick(View v) {
                     Toast.makeText(getContext(), holder.tv.getText(), Toast.LENGTH_SHORT).show();
                     if (targetFragment != null)
-                        getActivity().getSupportFragmentManager()
-                                .beginTransaction()
-//                                .setTransitionStyle(R.style.MyTransitionStyle)
-                                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
-                                .replace(R.id.content_view, targetFragment)
-                                .commit();
+                        getFragmentController().startFragment(targetFragment);
                 }
             });
         }

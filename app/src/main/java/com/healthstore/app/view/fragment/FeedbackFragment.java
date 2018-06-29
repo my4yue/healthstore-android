@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FeedbackFragment extends Fragment {
+public class FeedbackFragment extends BaseFragment {
 
     @BindView(R.id.top_bar) QMUITopBarLayout topBar;
     @BindView(R.id.edt_feedback) EditText editFeedback;
@@ -28,7 +28,12 @@ public class FeedbackFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         topBar.setTitle(R.string.feedback_title);
-        topBar.addLeftBackImageButton();
+        topBar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentController().popBackStack();
+            }
+        });
 
         return view;
     }

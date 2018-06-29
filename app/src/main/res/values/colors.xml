@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="app_color_primary">@android:color/black</color>  <!-- 浅灰色 -->
+    <color name="app_color_primary">@color/qmui_config_color_black</color>  <!-- 浅灰色 -->
     <color name="app_color_primary_dark">#303F9F</color>
-    <color name="app_color_accent">#FF4081</color>
+    <color name="app_color_accent">#ff4081</color>
 
     <color name="app_grey">#EEEEEE</color>
     <color name="app_grey_dark">#333333</color>
     <color name="app_grey_light">#ffffff</color>
 
+    <color name="app_tab_color_on_selected">#ff18A555</color>
 </resources>

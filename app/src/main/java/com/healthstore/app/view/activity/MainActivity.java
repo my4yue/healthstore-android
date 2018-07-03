@@ -1,4 +1,4 @@
-package com.healthstore.app.view;
+package com.healthstore.app.view.activity;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;

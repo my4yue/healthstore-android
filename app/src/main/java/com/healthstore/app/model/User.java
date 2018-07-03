@@ -1,10 +1,22 @@
 package com.healthstore.app.model;
 
-public class User {
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class User extends BaseResponse {
 
     long id;
     String userName;
     String watchword;
+    String wechatOpenId;
+    String wechatUnionId;
+    String iconUrl;
+    String gender;
+    String district;
+    String agendaBackgroundImageUrl;
+    boolean isVip;
+    boolean receiveActivityTrailer;
+    String imUserId;
 
     public long getId() {
         return id;

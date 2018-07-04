@@ -64,11 +64,11 @@ public class MainActivity extends HealthAppActivity {
 
         onSelected(tabAgenda);
 
-        try {
-            new UserPresenterImpl().getUser();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            new UserPresenterImpl().getUser();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 

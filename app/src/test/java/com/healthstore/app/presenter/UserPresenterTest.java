@@ -1,10 +1,8 @@
 package com.healthstore.app.presenter;
 
-import com.healthstore.app.presenter.impl.UserPresenterImpl;
+import com.healthstore.app.mvp.ui.presenter.UserPresenterImpl;
 
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 public class UserPresenterTest {
 

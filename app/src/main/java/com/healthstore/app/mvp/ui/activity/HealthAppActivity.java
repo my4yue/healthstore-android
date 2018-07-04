@@ -1,4 +1,4 @@
-package com.healthstore.app.view.activity;
+package com.healthstore.app.mvp.ui.activity;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;

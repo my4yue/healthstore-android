@@ -1,4 +1,4 @@
-package com.healthstore.app.view.fragment;
+package com.healthstore.app.mvp.ui.fragment;
 
 
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package com.healthstore.app.view.activity;
+package com.healthstore.app.mvp.ui.activity;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -11,12 +11,10 @@ import android.widget.TextView;
 
 import com.healthstore.app.R;
 import com.healthstore.app.helper.LogHelper;
-import com.healthstore.app.presenter.impl.UserPresenterImpl;
-import com.healthstore.app.view.fragment.MeFragment;
+import com.healthstore.app.mvp.ui.fragment.MeFragment;
 import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 

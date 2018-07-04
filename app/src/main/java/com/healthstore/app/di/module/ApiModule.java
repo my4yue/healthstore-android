@@ -1,10 +1,9 @@
-package com.healthstore.app.injection.modules;
+package com.healthstore.app.di.module;
 
 import com.healthstore.app.api.FeedbackService;
 import com.healthstore.app.api.UserService;
 import com.healthstore.app.api.VipService;
 
-import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -13,7 +12,6 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Module
 public class ApiModule {

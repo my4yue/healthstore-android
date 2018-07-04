@@ -1,8 +1,8 @@
-package com.healthstore.app.view.fragment;
+package com.healthstore.app.mvp.ui.fragment;
 
 import android.support.v4.app.Fragment;
 
-import com.healthstore.app.view.activity.HealthAppActivity;
+import com.healthstore.app.mvp.ui.activity.HealthAppActivity;
 
 public class BaseFragment extends Fragment{
 

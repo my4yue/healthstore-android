@@ -1,22 +1,13 @@
-package com.healthstore.app.presenter.impl;
+package com.healthstore.app.mvp.ui.presenter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.healthstore.app.injection.components.DaggerApiComponent;
-import com.healthstore.app.model.User;
-import com.healthstore.app.presenter.UserPresenter;
+import com.healthstore.app.mvp.ui.presenter.UserPresenter;
 import com.healthstore.app.api.UserService;
 
 import java.io.IOException;
 
 import javax.inject.Inject;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
-
-public class UserPresenterImpl extends BasePresenter implements UserPresenter {
+public class UserPresenterImpl implements UserPresenter {
 
     @Inject
     UserService userService;

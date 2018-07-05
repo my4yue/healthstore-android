@@ -12,19 +12,19 @@ import android.widget.TextView;
 
 import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
+import com.healthstore.app.di.component.DaggerIndexComponent;
+import com.healthstore.app.mvp.IPresenter;
 import com.healthstore.app.utils.LogUtils;
 import com.healthstore.app.mvp.ui.fragment.MeFragment;
 import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
-import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppActivity {
+public class IndexActivity extends AppActivity<IPresenter.Empty> {
 
     @BindView(R.id.content_view) View contentView;
 
@@ -40,18 +40,13 @@ public class MainActivity extends AppActivity {
 
     Integer currentSelected = null;
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = IndexActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Log.d(TAG, "onCreate");
-
-//        setContentView(R.layout.activity_main);
-//        ButterKnife.bind(this);
-
-        QMUIStatusBarHelper.translucent(this);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_view, new MeFragment()).commit();
 
@@ -117,6 +112,6 @@ public class MainActivity extends AppActivity {
 
     @Override
     void setupActivityComponent(AppComponent appComponent) {
-
+        DaggerIndexComponent.builder().appComponent(appComponent).build().inject(this);
     }
 }

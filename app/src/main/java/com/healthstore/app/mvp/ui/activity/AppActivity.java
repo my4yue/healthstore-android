@@ -11,10 +11,12 @@ import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.mvp.IPresenter;
 import com.healthstore.app.utils.AppUtils;
+import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import butterknife.Optional;
 import butterknife.Unbinder;
 
 public abstract class AppActivity<P extends IPresenter> extends AppCompatActivity {
@@ -30,7 +32,7 @@ public abstract class AppActivity<P extends IPresenter> extends AppCompatActivit
     private Unbinder mUnbinder;
 
     @Inject AppManager mAppManager;
-    @Inject P mPresenter;
+    @Inject @Nullable P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public abstract class AppActivity<P extends IPresenter> extends AppCompatActivit
         }
 
         setupActivityComponent(AppUtils.obtainAppComponentFromContext(this));
+
+        QMUIStatusBarHelper.translucent(this);
     }
 
     @Override

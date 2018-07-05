@@ -3,21 +3,26 @@ package com.healthstore.app.di.module;
 import android.app.Application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.healthstore.app.AppActivityLifeCycle;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class AppModule {
+public abstract class AppModule {
 
     @Singleton
     @Provides
-    ObjectMapper providerObjectMapper(){
+    static ObjectMapper providerObjectMapper(){
         return new ObjectMapper();
     }
 
-
+    @Binds
+//    @Named("appActivityLifecycle")
+    abstract Application.ActivityLifecycleCallbacks bindActivityLifecycle(AppActivityLifeCycle appActivityLifecycle);
 
 }

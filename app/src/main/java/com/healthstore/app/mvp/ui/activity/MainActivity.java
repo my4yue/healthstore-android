@@ -6,10 +6,12 @@ import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.healthstore.app.R;
+import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.utils.LogUtils;
 import com.healthstore.app.mvp.ui.fragment.MeFragment;
 import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
@@ -22,7 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends HealthAppActivity {
+public class MainActivity extends AppActivity {
 
     @BindView(R.id.content_view) View contentView;
 
@@ -38,11 +40,16 @@ public class MainActivity extends HealthAppActivity {
 
     Integer currentSelected = null;
 
+    private static final String TAG = MainActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+
+        Log.d(TAG, "onCreate");
+
+//        setContentView(R.layout.activity_main);
+//        ButterKnife.bind(this);
 
         QMUIStatusBarHelper.translucent(this);
 
@@ -62,16 +69,10 @@ public class MainActivity extends HealthAppActivity {
 
         onSelected(tabAgenda);
 
-//        try {
-//            new UserPresenterImpl().getUser();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
     }
 
     @OnClick({R.id.tab_agenda, R.id.tab_expert, R.id.tab_health, R.id.tab_me})
-    public void onSelected(TextView tv){
+    public void onSelected(TextView tv) {
         Integer index = Integer.valueOf(tv.getTag().toString());
 
         if (currentSelected == index)
@@ -105,7 +106,17 @@ public class MainActivity extends HealthAppActivity {
     }
 
     @Override
-    int getContentViewId() {
+    int contentViewId() {
         return R.id.content_view;
+    }
+
+    @Override
+    int layoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    void setupActivityComponent(AppComponent appComponent) {
+
     }
 }

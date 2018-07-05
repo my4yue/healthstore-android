@@ -37,7 +37,7 @@ public class MeFragment extends BaseFragment {
         iconView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentController().startFragment(new MeUserFragment());
+//                getFragmentController().startFragment(new MeUserFragment());
             }
         });
 
@@ -71,8 +71,8 @@ public class MeFragment extends BaseFragment {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getContext(), holder.tv.getText(), Toast.LENGTH_SHORT).show();
-                    if (targetFragment != null)
-                        getFragmentController().startFragment(targetFragment);
+//                    if (targetFragment != null)
+//                        getFragmentController().startFragment(targetFragment);
                 }
             });
         }

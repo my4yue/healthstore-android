@@ -10,16 +10,19 @@ import javax.inject.Inject;
 
 public class AppDelegate {
 
-    @Inject App mApp;
+    @Inject Application mApp;
     @Inject ObjectMapper mObjectMapper;
+    @Inject Application.ActivityLifecycleCallbacks mAppActivityLifeCycle;
 
     private AppComponent mAppComponent;
+
 
     public AppDelegate(App app) {
 
         mAppComponent = DaggerAppComponent.builder().application(app).build();
         mAppComponent.inject(this);
 
+        mApp.registerActivityLifecycleCallbacks(mAppActivityLifeCycle);
     }
 
     public AppComponent getAppComponent() {

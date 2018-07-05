@@ -36,7 +36,7 @@ public class MeUserFragment extends BaseFragment {
         topBar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentController().popBackStack();
+//                getFragmentController().popBackStack();
             }
         });
         topBar.addRightTextButton(R.string.save, R.id.btn_save_user).setOnClickListener(new View.OnClickListener() {

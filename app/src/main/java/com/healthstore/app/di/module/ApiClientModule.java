@@ -14,7 +14,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
 @Module
-public class ApiModule {
+public class ApiClientModule {
 
     public static final String serverUrl = "http://healthtest:8080/app/api/";
 

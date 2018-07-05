@@ -31,7 +31,7 @@ public class FeedbackFragment extends BaseFragment {
         topBar.addLeftBackImageButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFragmentController().popBackStack();
+//                getFragmentController().popBackStack();
             }
         });
 

@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.healthstore.app.R;
-import com.healthstore.app.helper.LogHelper;
+import com.healthstore.app.utils.LogUtils;
 import com.healthstore.app.mvp.ui.fragment.MeFragment;
 import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
@@ -95,13 +95,13 @@ public class MainActivity extends HealthAppActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_view, fragments.get(index)).commit();
 
-        LogHelper.toast(this, tv.getText());
+        LogUtils.toast(this, tv.getText());
 
     }
 
     @OnClick(R.id.btn_add_record)
     public void onAddRecord() {
-        LogHelper.toast(this, "添加健康记录");
+        LogUtils.toast(this, "添加健康记录");
     }
 
     @Override

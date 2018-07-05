@@ -48,7 +48,7 @@ public class IndexActivity extends AppActivity<IPresenter.Empty> {
 
         Log.d(TAG, "onCreate");
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_view, new UserIndexFragment()).commit();
+//        getSupportFragmentManager().beginTransaction().replace(R.id.content_view, new UserIndexFragment()).commit();
 
         tabs = new ArrayList<>();
         tabs.add(tabAgenda);

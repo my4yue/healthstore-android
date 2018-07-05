@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
@@ -55,7 +54,7 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
         Log.d(TAG, "mainThread - " + (Looper.myLooper() == Looper.getMainLooper()));
         Log.d(TAG, "context - " + (getContext() == null));
         Log.d(TAG, "activity - " + (getActivity() == null));
-//        LogUtils.toast(getContext(), "已读取用户 - " + user.getUserName());
+        LogUtils.toast(getContext(), "已读取用户 - " + user.getUserName());
     }
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -71,7 +70,6 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
         mPresenter.requestUser(1);
-
     }
 
     private class MeRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {

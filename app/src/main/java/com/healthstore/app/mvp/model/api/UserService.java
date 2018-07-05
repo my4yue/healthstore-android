@@ -1,6 +1,6 @@
-package com.healthstore.app.api;
+package com.healthstore.app.mvp.model.api;
 
-import com.healthstore.app.model.User;
+import com.healthstore.app.mvp.model.entity.User;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

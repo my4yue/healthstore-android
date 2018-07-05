@@ -1,4 +1,4 @@
-package com.healthstore.app.model;
+package com.healthstore.app.mvp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

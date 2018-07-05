@@ -1,6 +1,6 @@
 package com.healthstore.app.presenter;
 
-import com.healthstore.app.mvp.ui.presenter.UserPresenterImpl;
+import com.healthstore.app.mvp.presenter.UserPresenterImpl;
 
 import org.junit.Test;
 

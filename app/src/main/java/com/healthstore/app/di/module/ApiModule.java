@@ -1,8 +1,8 @@
 package com.healthstore.app.di.module;
 
-import com.healthstore.app.api.FeedbackService;
-import com.healthstore.app.api.UserService;
-import com.healthstore.app.api.VipService;
+import com.healthstore.app.mvp.model.api.FeedbackService;
+import com.healthstore.app.mvp.model.api.UserService;
+import com.healthstore.app.mvp.model.api.VipService;
 
 import java.util.concurrent.TimeUnit;
 

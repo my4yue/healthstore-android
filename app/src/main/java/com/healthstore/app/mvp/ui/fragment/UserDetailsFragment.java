@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.healthstore.app.R;
-import com.healthstore.app.mvp.ui.fragment.BaseFragment;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -21,7 +20,7 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MeUserFragment extends Fragment {
+public class UserDetailsFragment extends Fragment {
 
     @BindView(R.id.top_bar) QMUITopBarLayout topBar;
     @BindView(R.id.icon) QMUIRadiusImageView icon;
@@ -30,7 +29,7 @@ public class MeUserFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_me_user, null);
+        View view = inflater.inflate(R.layout.fragment_user_details, null);
         ButterKnife.bind(this, view);
 
         topBar.setTitle("个人信息");

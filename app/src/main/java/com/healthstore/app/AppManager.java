@@ -1,17 +1,13 @@
 package com.healthstore.app;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentController;
 
-import com.healthstore.app.mvp.ui.fragment.MeFragment;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

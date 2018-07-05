@@ -22,7 +22,6 @@ public abstract class AppModule {
     }
 
     @Binds
-//    @Named("appActivityLifecycle")
     abstract Application.ActivityLifecycleCallbacks bindActivityLifecycle(AppActivityLifeCycle appActivityLifecycle);
 
 }

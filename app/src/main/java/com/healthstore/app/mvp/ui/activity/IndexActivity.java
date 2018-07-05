@@ -14,8 +14,8 @@ import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.di.component.DaggerIndexComponent;
 import com.healthstore.app.mvp.IPresenter;
+import com.healthstore.app.mvp.ui.fragment.UserIndexFragment;
 import com.healthstore.app.utils.LogUtils;
-import com.healthstore.app.mvp.ui.fragment.MeFragment;
 import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
 
 import java.util.ArrayList;
@@ -48,7 +48,7 @@ public class IndexActivity extends AppActivity<IPresenter.Empty> {
 
         Log.d(TAG, "onCreate");
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_view, new MeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_view, new UserIndexFragment()).commit();
 
         tabs = new ArrayList<>();
         tabs.add(tabAgenda);
@@ -60,7 +60,7 @@ public class IndexActivity extends AppActivity<IPresenter.Empty> {
         fragments.add(new Fragment());
         fragments.add(new Fragment());
         fragments.add(new Fragment());
-        fragments.add(new MeFragment());
+        fragments.add(new UserIndexFragment());
 
         onSelected(tabAgenda);
 

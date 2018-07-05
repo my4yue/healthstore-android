@@ -2,6 +2,7 @@ package com.healthstore.app.di.component;
 
 import android.app.Application;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.AppDelegate;
 import com.healthstore.app.AppManager;
 import com.healthstore.app.di.module.ApiClientModule;
@@ -11,6 +12,7 @@ import javax.inject.Singleton;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import retrofit2.Retrofit;
 
 @Singleton
 @Component(modules = {AppModule.class, ApiClientModule.class})
@@ -21,6 +23,10 @@ public interface AppComponent {
     Application application();
 
     AppManager appManager();
+
+    ObjectMapper objectMapper();
+
+    Retrofit retrofit();
 
     @Component.Builder
     interface Builder{

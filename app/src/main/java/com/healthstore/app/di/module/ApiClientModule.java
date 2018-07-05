@@ -12,11 +12,13 @@ import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Module
 public class ApiClientModule {
 
-    public static final String serverUrl = "http://healthtest:8080/app/api/";
+    public static final String serverUrl = "http://114.55.67.92:8080/app/api/";
 
     @Provides
     @Singleton
@@ -34,6 +36,8 @@ public class ApiClientModule {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
                 .baseUrl(serverUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return retrofit;
     }

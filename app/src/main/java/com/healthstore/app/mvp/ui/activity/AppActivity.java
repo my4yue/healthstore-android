@@ -52,8 +52,14 @@ public abstract class AppActivity<P extends IPresenter> extends AppCompatActivit
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         if (mUnbinder != null)
             mUnbinder.unbind();
+        mUnbinder = null;
+
+        if (mPresenter != null)
+            mPresenter.onDestroy();
+        mPresenter = null;
     }
 
 }

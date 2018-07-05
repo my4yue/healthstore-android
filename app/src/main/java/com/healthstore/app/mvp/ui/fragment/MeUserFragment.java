@@ -2,6 +2,7 @@ package com.healthstore.app.mvp.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +21,7 @@ import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MeUserFragment extends BaseFragment {
+public class MeUserFragment extends Fragment {
 
     @BindView(R.id.top_bar) QMUITopBarLayout topBar;
     @BindView(R.id.icon) QMUIRadiusImageView icon;

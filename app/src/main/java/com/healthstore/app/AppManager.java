@@ -9,11 +9,18 @@ import android.support.v4.app.FragmentController;
 
 import com.healthstore.app.mvp.ui.fragment.MeFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
 public class AppManager {
+
+    private List<Activity> activities = new ArrayList<>();
+    private Activity mCurrentActivity;
 
     @Inject
     public AppManager() {

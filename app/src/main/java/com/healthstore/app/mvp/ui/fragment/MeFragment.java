@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MeFragment extends BaseFragment {
+public class MeFragment extends Fragment {
 
     @BindView(R.id.recycler) RecyclerView recyclerView;
     @BindView(R.id.icon) QMUIRadiusImageView iconView;

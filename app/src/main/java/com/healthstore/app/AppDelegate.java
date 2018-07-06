@@ -1,6 +1,7 @@
 package com.healthstore.app;
 
 import android.app.Application;
+import android.support.v4.app.FragmentManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.di.component.AppComponent;

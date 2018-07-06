@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
@@ -34,15 +35,14 @@ public class UserPresenter implements IPresenter {
     public void requestUser(long id) {
         mView.showLoading();
         mModel.getUserById(id)
-                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).doFinally(new Action() {
-            @Override public void run() throws Exception {
-                mView.hideLoading();
-            }
-        }).subscribe(user -> {
-            String userString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
-            Log.d("requestUser", userString);
-            mView.onUserUpdated(user);
-        });
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(() -> mView.hideLoading())
+                .subscribe(user -> {
+                    String userString = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+                    Log.d("requestUser", userString);
+                    mView.onUserUpdated(user);
+                });
     }
 
     @Override public void onStart() {

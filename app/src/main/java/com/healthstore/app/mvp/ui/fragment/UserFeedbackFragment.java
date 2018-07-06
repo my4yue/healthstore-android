@@ -16,7 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class FeedbackFragment extends Fragment {
+public class UserFeedbackFragment extends Fragment {
 
     @BindView(R.id.top_bar) QMUITopBarLayout topBar;
     @BindView(R.id.edt_feedback) EditText editFeedback;

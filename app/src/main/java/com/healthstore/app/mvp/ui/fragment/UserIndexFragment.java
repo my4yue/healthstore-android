@@ -77,7 +77,7 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
         private final String[] arrayTitle = new String[]{"会员卡", "会籍资料", "商城", "我的设备", "反馈", "设置"};
         private final int[] arrayIcons = new int[]{R.mipmap.vip_card, R.mipmap.vip, R.mipmap.mall,
                 R.mipmap.my_device, R.mipmap.feedback, R.mipmap.settings};
-        private final Fragment[] arrayFragment = new Fragment[]{null, null, null, null, new FeedbackFragment(), null};
+        private final Fragment[] arrayFragment = new Fragment[]{null, null, null, null, new UserFeedbackFragment(), null};
 
         @NonNull
         @Override

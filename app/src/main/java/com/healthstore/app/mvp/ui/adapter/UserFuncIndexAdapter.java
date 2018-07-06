@@ -35,8 +35,8 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
     public UserFuncIndexAdapter(){
     }
 
-    public void setUser(User user){
-        if (user.isVip()) {
+    public void setUpUser(User user){
+        if (!user.isVip()) {
             mVipInfoHolder.iv.setColorFilter(Color.GRAY);
             mVipInfoHolder.tv.setTextColor(Color.GRAY);
             mVipInfoHolder.itemView.setOnClickListener(v -> {

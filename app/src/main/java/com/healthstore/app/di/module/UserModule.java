@@ -7,7 +7,9 @@ import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.contract.UserContract;
 import com.healthstore.app.mvp.model.UserModel;
 import com.healthstore.app.mvp.model.api.UserService;
+import com.healthstore.app.mvp.ui.activity.AppActivity;
 import com.healthstore.app.mvp.ui.adapter.UserFuncIndexAdapter;
+import com.healthstore.app.mvp.ui.fragment.AppFragment;
 
 import dagger.Module;
 import dagger.Provides;
@@ -36,8 +38,15 @@ public class UserModule {
         return retrofit.create(UserService.class);
     }
 
-    @Provides @FragmentScope Context provideContext(){
-        return mContext;
+//    @Provides @FragmentScope Context provideContext(){
+//        return mContext;
+//    }
+
+    @Provides @FragmentScope AppFragment provideAppFragment(){
+        return (AppFragment) mView;
+    }
+    @Provides @FragmentScope AppActivity provideAppActivity(){
+        return (AppActivity) mContext;
     }
 
 }

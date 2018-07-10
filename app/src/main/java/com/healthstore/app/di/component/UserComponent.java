@@ -5,7 +5,9 @@ import android.content.Context;
 import com.healthstore.app.di.module.UserModule;
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.contract.UserContract;
+import com.healthstore.app.mvp.ui.fragment.AppFragment;
 import com.healthstore.app.mvp.ui.fragment.UserDetailsFragment;
+import com.healthstore.app.mvp.ui.fragment.UserFeedbackFragment;
 import com.healthstore.app.mvp.ui.fragment.UserIndexFragment;
 
 import dagger.BindsInstance;
@@ -17,14 +19,5 @@ public interface UserComponent {
 
     void inject(UserIndexFragment userIndexFragment);
     void inject(UserDetailsFragment userDetailsFragment);
-
-//    Context context();
-//
-//    interface Builder{
-//        @BindsInstance
-//        Context context(Context context);
-//
-//        UserComponent build();
-//    }
 
 }

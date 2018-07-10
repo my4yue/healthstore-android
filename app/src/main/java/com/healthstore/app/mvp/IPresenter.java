@@ -10,7 +10,7 @@ public interface IPresenter {
     void onStart();
     void onDestroy();
 
-    @ActivityScope
+//    @ActivityScope
     class Empty implements IPresenter{
 
         @Inject

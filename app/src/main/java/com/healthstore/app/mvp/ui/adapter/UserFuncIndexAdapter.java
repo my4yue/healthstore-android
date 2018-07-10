@@ -1,8 +1,6 @@
 package com.healthstore.app.mvp.ui.adapter;
 
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -12,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.healthstore.app.ActivityManager;
 import com.healthstore.app.AppManager;
 import com.healthstore.app.R;
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.model.entity.User;
+import com.healthstore.app.mvp.ui.activity.AppActivity;
 import com.healthstore.app.mvp.ui.fragment.UserFeedbackFragment;
 
 import javax.inject.Inject;
@@ -28,8 +28,9 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
 
     static final int FUNC_COUNT = 6;
 
-    @Inject Context mContext;
     @Inject AppManager mAppManager;
+    @Inject ActivityManager mActivityManager;
+    @Inject AppActivity mAppActivity;
 
     @Inject
     public UserFuncIndexAdapter(){
@@ -40,7 +41,7 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
             mVipInfoHolder.iv.setColorFilter(Color.GRAY);
             mVipInfoHolder.tv.setTextColor(Color.GRAY);
             mVipInfoHolder.itemView.setOnClickListener(v -> {
-                mAppManager.showToastUtils("请先成为会员");
+                mAppManager.showToast("请先成为会员");
             });
         } else {
             mVipInfoHolder.iv.clearColorFilter();
@@ -60,7 +61,7 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
 
     @NonNull @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.me_item_layout, null);
+        View view = LayoutInflater.from(mAppActivity).inflate(R.layout.me_item_layout, null);
         return new ViewHolder(view);
     }
 
@@ -87,7 +88,7 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
                 mMallHolder.tv.setText("商城");
                 mMallHolder.iv.setImageResource(R.mipmap.mall);
                 mMallHolder.itemView.setOnClickListener(v -> {
-                    mAppManager.showToastUtils("敬请期待");
+                    mAppManager.showToast("敬请期待");
                 });
                 break;
             case 3:
@@ -105,7 +106,7 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
                 mFeedbackHolder.tv.setText("反馈");
                 mFeedbackHolder.iv.setImageResource(R.mipmap.feedback);
                 mFeedbackHolder.itemView.setOnClickListener(v -> {
-                    // todo: goto FeedbackFragment
+                    mActivityManager.replaceFragment(new UserFeedbackFragment());
                 });
                 break;
             case 5:

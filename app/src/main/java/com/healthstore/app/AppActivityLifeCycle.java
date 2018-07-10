@@ -5,6 +5,8 @@ import android.app.Application;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.healthstore.app.mvp.ui.activity.AppActivity;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -15,6 +17,8 @@ public class AppActivityLifeCycle implements Application.ActivityLifecycleCallba
 
     @Inject
     AppManager appManager;
+    @Inject
+    AppFragmentLifeCycle appFragmentLifeCycle;
 
     @Inject
     public AppActivityLifeCycle() {
@@ -24,6 +28,11 @@ public class AppActivityLifeCycle implements Application.ActivityLifecycleCallba
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         Log.d(TAG, "AppActivityLifeCycle - onActivityCreated");
         Log.d(TAG, "appManager is " + (appManager == null ? "null" : "not null"));
+
+        if (activity instanceof AppActivity) {
+            AppActivity appActivity = (AppActivity) activity;
+            appActivity.getSupportFragmentManager().registerFragmentLifecycleCallbacks(appFragmentLifeCycle, true);
+        }
     }
 
     @Override

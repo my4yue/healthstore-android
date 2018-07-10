@@ -29,10 +29,10 @@ public class AppManager {
 
     }
 
-//    public void startActivity(Context ctx, Class activityClass) {
-//        Intent intent = new Intent(ctx, activityClass);
-//        ctx.startActivity(intent);
-//    }
+    public void startActivity(Context ctx, Class activityClass) {
+        Intent intent = new Intent(ctx, activityClass);
+        ctx.startActivity(intent);
+    }
 //
 //    public void startFragment(FragmentController controller, Fragment targetFragment) {
 //        String tag = targetFragment.getClass().getSimpleName();
@@ -48,7 +48,7 @@ public class AppManager {
 //        controller.getSupportFragmentManager().popBackStackImmediate();
 //    }
 
-    public void showToastUtils(String message) {
+    public void showToast(String message) {
         if (mToast == null)
             mToast = Toast.makeText(mApplication, "", Toast.LENGTH_SHORT);
         mToast.setText(message);

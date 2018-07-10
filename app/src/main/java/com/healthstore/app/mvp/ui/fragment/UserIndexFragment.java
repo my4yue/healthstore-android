@@ -49,7 +49,7 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
     @Override void setUpComponent(AppComponent appComponent) {
         DaggerUserComponent.builder()
                 .appComponent(appComponent)
-                .userModule(new UserModule(this, getContext()))
+                .userModule(new UserModule(this, getActivity()))
                 .build()
                 .inject(this);
     }
@@ -57,7 +57,6 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
     @Override public void onUserUpdated(User user) {
         Log.d(TAG, "已读取用户 - " + user.getUserName());
         userAdapter.setUpUser(user);
-
     }
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

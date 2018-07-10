@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 
 import com.healthstore.app.AppManager;
 import com.healthstore.app.di.component.AppComponent;
@@ -25,6 +27,7 @@ public abstract class AppFragment<P extends IPresenter> extends Fragment{
     @Inject AppManager mAppManager;
     @Inject P mPresenter;
 
+    int mContainerId;
     Unbinder mUnbinder;
 
     abstract int layoutResId();
@@ -35,6 +38,8 @@ public abstract class AppFragment<P extends IPresenter> extends Fragment{
     @Nullable @Override public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
 
+        mContainerId = container.getId();
+
         if (layoutResId() != 0) {
             view = inflater.inflate(layoutResId(), null);
             mUnbinder = ButterKnife.bind(this, view);
@@ -43,7 +48,6 @@ public abstract class AppFragment<P extends IPresenter> extends Fragment{
         setUpComponent(AppUtils.obtainAppComponentFromContext(this.getContext()));
 
         initData(savedInstanceState);
-
         return view;
     }
 
@@ -59,4 +63,9 @@ public abstract class AppFragment<P extends IPresenter> extends Fragment{
         mPresenter = null;
 
     }
+
+    public int getContainerId() {
+        return mContainerId;
+    }
+
 }

@@ -18,6 +18,8 @@ public class App extends Application {
         Log.d(TAG, "onCreate");
 
         mAppDelegate = new AppDelegate(this);
+
+//        Timber.plant(new Timber.DebugTree());
     }
 
     public AppComponent getAppComponent() {

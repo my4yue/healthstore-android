@@ -15,10 +15,4 @@ public interface IView {
 
     default void showMessage(@NonNull String message) {}
 
-    @ActivityScope
-    class Empty implements IView{
-        @Inject
-        public Empty(){}
-    }
-
 }

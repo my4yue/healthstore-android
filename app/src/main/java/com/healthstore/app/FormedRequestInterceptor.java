@@ -32,7 +32,7 @@ public class FormedRequestInterceptor implements Interceptor {
         Request request = chain.request();
 
         RequestBody body = request.body();
-        if (body != null && body.contentType().type().contains("json")) {
+        if (body != null && body.contentType().subtype().contains("json")) {
             long contentLength = request.body().contentLength();
             String method = request.method();
             Buffer buf = new Buffer();

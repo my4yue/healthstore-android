@@ -2,6 +2,7 @@ package com.healthstore.app.di.module;
 
 import android.app.Application;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.AppActivityLifeCycle;
 import com.healthstore.app.mvp.model.entity.User;
@@ -19,7 +20,9 @@ public abstract class AppModule {
     @Singleton
     @Provides
     static ObjectMapper providerObjectMapper(){
-        return new ObjectMapper();
+        ObjectMapper mapper =  new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        return mapper;
     }
 
     @Singleton

@@ -7,7 +7,7 @@ import javax.inject.Inject;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class User extends Response {
 
-    long id;
+    Long id;
     String userName;
     String watchword;
     String wechatOpenId;
@@ -16,11 +16,11 @@ public class User extends Response {
     String gender;
     String district;
     String agendaBackgroundImageUrl;
-    boolean isVip;
-    boolean receiveActivityTrailer;
+    Boolean isVip;
+    Boolean receiveActivityTrailer;
     String imUserId;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -88,19 +88,19 @@ public class User extends Response {
         this.agendaBackgroundImageUrl = agendaBackgroundImageUrl;
     }
 
-    public boolean isVip() {
+    public Boolean isVip() {
         return isVip;
     }
 
-    public void setVip(boolean vip) {
+    public void setVip(Boolean vip) {
         isVip = vip;
     }
 
-    public boolean isReceiveActivityTrailer() {
+    public Boolean isReceiveActivityTrailer() {
         return receiveActivityTrailer;
     }
 
-    public void setReceiveActivityTrailer(boolean receiveActivityTrailer) {
+    public void setReceiveActivityTrailer(Boolean receiveActivityTrailer) {
         this.receiveActivityTrailer = receiveActivityTrailer;
     }
 
@@ -112,7 +112,4 @@ public class User extends Response {
         this.imUserId = imUserId;
     }
 
-    @Override protected Object clone() throws CloneNotSupportedException {
-        return super.clone();
-    }
 }

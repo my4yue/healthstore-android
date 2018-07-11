@@ -1,6 +1,8 @@
 package com.healthstore.app.di.module;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.FixVoidRespInterceptor;
+import com.healthstore.app.FormedRequestInterceptor;
 import com.healthstore.app.mvp.model.api.FeedbackService;
 import com.healthstore.app.mvp.model.api.UserService;
 import com.healthstore.app.mvp.model.api.VipService;
@@ -24,12 +26,13 @@ public class ApiClientModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(FixVoidRespInterceptor fixVoidRespInterceptor){
+    OkHttpClient provideOkHttpClient(FixVoidRespInterceptor fixVoidRespInterceptor, FormedRequestInterceptor formedRequestInterceptor){
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(60 * 1000, TimeUnit.MILLISECONDS)
                 .readTimeout(60 * 1000, TimeUnit.MILLISECONDS)
+                .addInterceptor(formedRequestInterceptor)
                 .addInterceptor(logging)
                 .addInterceptor(fixVoidRespInterceptor)
                 .build();
@@ -38,11 +41,11 @@ public class ApiClientModule {
 
     @Provides
     @Singleton
-    Retrofit provideRetrofit(OkHttpClient client) {
+    Retrofit provideRetrofit(OkHttpClient client, ObjectMapper objectMapper) {
         Retrofit retrofit = new Retrofit.Builder()
                 .client(client)
                 .baseUrl(serverUrl)
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(JacksonConverterFactory.create(objectMapper))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         return retrofit;

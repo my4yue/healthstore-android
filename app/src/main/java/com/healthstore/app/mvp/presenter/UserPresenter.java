@@ -32,9 +32,15 @@ public class UserPresenter implements IPresenter {
     public UserPresenter() {
     }
 
-//    public void requestUser(long id) {
-//        mView.onUserUpdated(appManager.getMainUser());
-//    }
+    public void updateMainUser(User user){
+        User mainUser = appManager.getMainUser();
+        mModel.updateUser(mainUser.getId(), user)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(response -> {
+                    System.out.println(response.getErrorCode());
+                });
+    }
 
     @Override public void onStart() {
 

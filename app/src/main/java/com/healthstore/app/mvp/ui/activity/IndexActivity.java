@@ -62,7 +62,8 @@ public class IndexActivity extends AppActivity<IPresenter.Empty> {
         fragments.add(new Fragment());
         fragments.add(new UserIndexFragment());
 
-        onSelected(tabAgenda);
+//        onSelected(tabAgenda);
+        tabAgenda.performClick();
 
     }
 

@@ -1,5 +1,6 @@
 package com.healthstore.app.mvp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -24,6 +25,7 @@ public class Response {
         this.errorCode = errorCode;
     }
 
+    @JsonIgnore
     public boolean isSucceed() {
         return errorCode == null || errorCode == 0;
     }

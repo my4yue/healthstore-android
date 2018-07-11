@@ -33,12 +33,15 @@ public class UserPresenter implements IPresenter {
     }
 
     public void updateMainUser(User user){
+        mView.showLoading();
         User mainUser = appManager.getMainUser();
         mModel.updateUser(mainUser.getId(), user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     System.out.println(response.getErrorCode());
+                    mView.hideLoading();
+//                    mView.showMessage("保存成功");
                 });
     }
 

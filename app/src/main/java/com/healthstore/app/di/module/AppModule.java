@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.AppActivityLifeCycle;
 import com.healthstore.app.mvp.model.entity.User;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -15,11 +16,17 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public abstract class AppModule {
+public class AppModule {
+
+    Application mApplication;
+
+    public AppModule(Application application) {
+        mApplication = application;
+    }
 
     @Singleton
     @Provides
-    static ObjectMapper providerObjectMapper(){
+    ObjectMapper providerObjectMapper(){
         ObjectMapper mapper =  new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         return mapper;
@@ -27,10 +34,14 @@ public abstract class AppModule {
 
     @Singleton
     @Provides
-//    @Named("user")
-    static User providerMainUser() {return new User(); }
+    Application provideApplication(){
+        return mApplication;
+    }
 
-    @Binds
-    abstract Application.ActivityLifecycleCallbacks bindActivityLifecycle(AppActivityLifeCycle appActivityLifecycle);
+    @Singleton
+    @Provides
+    Application.ActivityLifecycleCallbacks provideActivityLifecycle(AppActivityLifeCycle appActivityLifecycle){
+        return appActivityLifecycle;
+    }
 
 }

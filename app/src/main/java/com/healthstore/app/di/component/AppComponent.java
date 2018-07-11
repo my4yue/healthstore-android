@@ -9,6 +9,7 @@ import com.healthstore.app.ImageLoader;
 import com.healthstore.app.di.module.ApiClientModule;
 import com.healthstore.app.di.module.AppModule;
 import com.healthstore.app.mvp.model.entity.User;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -31,16 +32,14 @@ public interface AppComponent {
 
     Retrofit retrofit();
 
-    User user();
-
     ImageLoader imageLoader();
 
-    @Component.Builder
-    interface Builder{
-        @BindsInstance
-        Builder application(Application application);
-
-        AppComponent build();
-    }
+//    @Component.Builder
+//    interface Builder{
+//        @BindsInstance
+//        Builder application(Application application);
+//
+//        AppComponent build();
+//    }
 
 }

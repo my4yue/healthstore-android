@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.di.component.DaggerAppComponent;
+import com.healthstore.app.di.module.AppModule;
 import com.healthstore.app.mvp.model.api.UserService;
 import com.healthstore.app.mvp.model.entity.User;
 
@@ -23,7 +24,7 @@ public class AppDelegate {
 
     public AppDelegate(App app) {
 
-        mAppComponent = DaggerAppComponent.builder().application(app).build();
+        mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(app)).build();
         mAppComponent.inject(this);
 
         mAppManager.syncMainUser();

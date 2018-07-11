@@ -35,10 +35,12 @@ public class FeedbackPresenter implements IPresenter {
     }
 
     public void submit(String text) {
+        view.showLoading();
         feedbackService.submitFeedback(appManager.getMainUser().getId(), text)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
+                    view.hideLoading();
                     if (response.isSucceed())
                         view.onSubmitSuccess();
                     else

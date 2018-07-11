@@ -17,8 +17,11 @@ import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.mvp.IPresenter;
 import com.healthstore.app.mvp.IView;
 import com.healthstore.app.utils.AppUtils;
+import com.healthstore.app.utils.TipUtils;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -31,14 +34,13 @@ public abstract class AppFragment<P extends IPresenter> extends Fragment impleme
     @Inject ImageLoader mImageLoader;
     @Inject ActivityManager mActivityManager;
     @Inject P mPresenter;
+    QMUITipDialog loadingTipDialog;
 
     int mContainerId;
     Unbinder mUnbinder;
 
     abstract int layoutResId();
     abstract void setUpComponent(AppComponent appComponent);
-
-    void initData(@Nullable Bundle savedInstanceState){}
 
     @Nullable @Override public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = super.onCreateView(inflater, container, savedInstanceState);
@@ -50,9 +52,8 @@ public abstract class AppFragment<P extends IPresenter> extends Fragment impleme
             mUnbinder = ButterKnife.bind(this, view);
         }
 
-        setUpComponent(AppUtils.obtainAppComponentFromContext(this.getContext()));
-
-        initData(savedInstanceState);
+        setUpComponent(AppUtils.obtainAppComponentFromContext(getContext()));
+        loadingTipDialog = TipUtils.provideLoadingTip(getContext());
         return view;
     }
 
@@ -74,14 +75,14 @@ public abstract class AppFragment<P extends IPresenter> extends Fragment impleme
     }
 
     @Override public void showMessage(@NonNull String message) {
-        mAppManager.showToast(message);
+        TipUtils.showTipDialog(getContext(), message);
     }
 
     @Override public void showLoading() {
-
+        loadingTipDialog.show();
     }
 
     @Override public void hideLoading() {
-
+        loadingTipDialog.dismiss();
     }
 }

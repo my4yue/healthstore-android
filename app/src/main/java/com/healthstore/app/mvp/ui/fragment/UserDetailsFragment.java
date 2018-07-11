@@ -3,13 +3,13 @@ package com.healthstore.app.mvp.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.text.InputType;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
+//import com.bumptech.glide.Glide;
+//import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+//import com.bumptech.glide.request.RequestOptions;
 import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.di.component.DaggerUserComponent;
@@ -20,17 +20,15 @@ import com.healthstore.app.mvp.presenter.UserPresenter;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
-import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class UserDetailsFragment extends AppFragment<UserPresenter> implements UserContract.View {
 
     @BindView(R.id.top_bar) QMUITopBarLayout topBar;
-    @BindView(R.id.icon) QMUIRadiusImageView icon;
+    @BindView(R.id.icon) QMUIRadiusImageView iconView;
     @BindView(R.id.me_list) QMUIGroupListView meListView;
 
     @Override int layoutResId() {
@@ -89,6 +87,8 @@ public class UserDetailsFragment extends AppFragment<UserPresenter> implements U
         ivName.setDetailText(user.getUserName());
         ivSex.setDetailText(user.getGender());
         ivDistrict.setDetailText(user.getDistrict());
+
+        mImageLoader.load(getContext(), mAppManager.getMainUser().getIconUrl(), iconView);
     }
 
 }

@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 
 import com.healthstore.app.ActivityManager;
 import com.healthstore.app.AppManager;
+import com.healthstore.app.ImageLoader;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.mvp.IPresenter;
 import com.healthstore.app.mvp.IView;
@@ -27,6 +28,7 @@ public abstract class AppFragment<P extends IPresenter> extends Fragment impleme
     protected final String TAG = this.getClass().getSimpleName();
 
     @Inject AppManager mAppManager;
+    @Inject ImageLoader mImageLoader;
     @Inject ActivityManager mActivityManager;
     @Inject P mPresenter;
 

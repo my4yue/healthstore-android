@@ -5,6 +5,7 @@ import android.app.Application;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.AppDelegate;
 import com.healthstore.app.AppManager;
+import com.healthstore.app.ImageLoader;
 import com.healthstore.app.di.module.ApiClientModule;
 import com.healthstore.app.di.module.AppModule;
 import com.healthstore.app.mvp.model.entity.User;
@@ -31,6 +32,8 @@ public interface AppComponent {
     Retrofit retrofit();
 
     User user();
+
+    ImageLoader imageLoader();
 
     @Component.Builder
     interface Builder{

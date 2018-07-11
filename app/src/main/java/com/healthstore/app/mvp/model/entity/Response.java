@@ -2,8 +2,8 @@ package com.healthstore.app.mvp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class BaseResponse {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Response {
 
     String errorString;
     Integer errorCode;
@@ -22,5 +22,9 @@ public class BaseResponse {
 
     public void setErrorCode(Integer errorCode) {
         this.errorCode = errorCode;
+    }
+
+    public boolean isSucceed() {
+        return errorCode == null || errorCode == 0;
     }
 }

@@ -16,6 +16,7 @@ import com.healthstore.app.R;
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.model.entity.User;
 import com.healthstore.app.mvp.ui.activity.AppActivity;
+import com.healthstore.app.mvp.ui.fragment.AppFragment;
 import com.healthstore.app.mvp.ui.fragment.UserFeedbackFragment;
 
 import javax.inject.Inject;
@@ -31,33 +32,11 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
     @Inject AppManager mAppManager;
     @Inject ActivityManager mActivityManager;
     @Inject AppActivity mAppActivity;
+    @Inject AppFragment mAppFragment;
 
     @Inject
     public UserFuncIndexAdapter(){
     }
-
-    public void setUpUser(User user){
-        if (!user.isVip()) {
-            mVipInfoHolder.iv.setColorFilter(Color.GRAY);
-            mVipInfoHolder.tv.setTextColor(Color.GRAY);
-            mVipInfoHolder.itemView.setOnClickListener(v -> {
-                mAppManager.showToast("请先成为会员");
-            });
-        } else {
-            mVipInfoHolder.iv.clearColorFilter();
-            mVipInfoHolder.tv.setTextColor(Color.BLACK);
-            mVipInfoHolder.itemView.setOnClickListener(v -> {
-                // todo: goto VipFragment
-            });
-        }
-    }
-
-    private ViewHolder mVipCardHolder;
-    private ViewHolder mVipInfoHolder;
-    private ViewHolder mMallHolder;
-    private ViewHolder mDeviceHolder;
-    private ViewHolder mFeedbackHolder;
-    private ViewHolder mSettingHolder;
 
     @NonNull @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -66,60 +45,68 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
     }
 
     @Override public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        User user  = mAppManager.getMainUser();
         switch (position) {
             case 0:
-                mVipCardHolder = holder;
-                mVipCardHolder.fragment = new Fragment();
-                mVipCardHolder.tv.setText("会员卡");
-                mVipCardHolder.iv.setImageResource(R.mipmap.vip_card);
-                mVipCardHolder.itemView.setOnClickListener(v -> {
+                holder.fragment = new Fragment();
+                holder.tv.setText("会员卡");
+                holder.iv.setImageResource(R.mipmap.vip_card);
+                holder.itemView.setOnClickListener(v -> {
                     // todo: goto VipCardFragment
                 });
                 break;
             case 1:
-                mVipInfoHolder = holder;
-                mVipInfoHolder.fragment = new Fragment();
-                mVipInfoHolder.tv.setText("会籍资料");
-                mVipInfoHolder.iv.setImageResource(R.mipmap.vip);
+                holder.fragment = new Fragment();
+                holder.tv.setText("会籍资料");
+                holder.iv.setImageResource(R.mipmap.vip);
+                if (!user.isVip()) {
+                    holder.iv.setColorFilter(Color.GRAY);
+                    holder.tv.setTextColor(Color.GRAY);
+                    holder.itemView.setOnClickListener(v -> {
+                        mAppManager.showToast("请先成为会员");
+                    });
+                } else {
+                    holder.iv.clearColorFilter();
+                    holder.tv.setTextColor(Color.BLACK);
+                    holder.itemView.setOnClickListener(v -> {
+                        // todo: goto VipFragment
+                    });
+                }
                 break;
             case 2:
-                mMallHolder = holder;
-                mMallHolder.fragment = new Fragment();
-                mMallHolder.tv.setText("商城");
-                mMallHolder.iv.setImageResource(R.mipmap.mall);
-                mMallHolder.itemView.setOnClickListener(v -> {
+                holder.fragment = new Fragment();
+                holder.tv.setText("商城");
+                holder.iv.setImageResource(R.mipmap.mall);
+                holder.itemView.setOnClickListener(v -> {
                     mAppManager.showToast("敬请期待");
                 });
                 break;
             case 3:
-                mDeviceHolder = holder;
-                mDeviceHolder.fragment = new Fragment();
-                mDeviceHolder.tv.setText("我的设备");
-                mDeviceHolder.iv.setImageResource(R.mipmap.my_device);
-                mDeviceHolder.itemView.setOnClickListener(v -> {
+                holder.fragment = new Fragment();
+                holder.tv.setText("我的设备");
+                holder.iv.setImageResource(R.mipmap.my_device);
+                holder.itemView.setOnClickListener(v -> {
                     // todo: goto SettingsFragment
                 });
                 break;
             case 4:
-                mFeedbackHolder = holder;
-                mFeedbackHolder.fragment = new UserFeedbackFragment();
-                mFeedbackHolder.tv.setText("反馈");
-                mFeedbackHolder.iv.setImageResource(R.mipmap.feedback);
-                mFeedbackHolder.itemView.setOnClickListener(v -> {
-                    mActivityManager.replaceFragment(new UserFeedbackFragment());
+                holder.fragment = new UserFeedbackFragment();
+                holder.tv.setText("反馈");
+                holder.iv.setImageResource(R.mipmap.feedback);
+                holder.itemView.setOnClickListener(v -> {
+                    mActivityManager.replaceFragment(mAppFragment.getContainerId(), new UserFeedbackFragment());
                 });
                 break;
             case 5:
-                mSettingHolder = holder;
-                mSettingHolder.fragment = new Fragment();
-                mSettingHolder.tv.setText("设置");
-                mSettingHolder.iv.setImageResource(R.mipmap.settings);
-                mSettingHolder.itemView.setOnClickListener(v -> {
+                holder.fragment = new Fragment();
+                holder.tv.setText("设置");
+                holder.iv.setImageResource(R.mipmap.settings);
+                holder.itemView.setOnClickListener(v -> {
                     // todo: goto SettingsFragment
                 });
                 break;
-
         }
+
     }
 
     @Override public int getItemCount() {

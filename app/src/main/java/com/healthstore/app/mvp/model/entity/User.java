@@ -2,8 +2,10 @@ package com.healthstore.app.mvp.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import javax.inject.Inject;
+
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class User extends BaseResponse {
+public class User extends Response {
 
     long id;
     String userName;
@@ -108,5 +110,9 @@ public class User extends BaseResponse {
 
     public void setImUserId(String imUserId) {
         this.imUserId = imUserId;
+    }
+
+    @Override protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

@@ -10,9 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 
+import com.healthstore.app.ActivityManager;
 import com.healthstore.app.AppManager;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.mvp.IPresenter;
+import com.healthstore.app.mvp.IView;
 import com.healthstore.app.utils.AppUtils;
 
 import javax.inject.Inject;
@@ -20,11 +22,12 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-public abstract class AppFragment<P extends IPresenter> extends Fragment{
+public abstract class AppFragment<P extends IPresenter> extends Fragment implements IView{
 
     protected final String TAG = this.getClass().getSimpleName();
 
     @Inject AppManager mAppManager;
+    @Inject ActivityManager mActivityManager;
     @Inject P mPresenter;
 
     int mContainerId;
@@ -68,4 +71,15 @@ public abstract class AppFragment<P extends IPresenter> extends Fragment{
         return mContainerId;
     }
 
+    @Override public void showMessage(@NonNull String message) {
+        mAppManager.showToast(message);
+    }
+
+    @Override public void showLoading() {
+
+    }
+
+    @Override public void hideLoading() {
+
+    }
 }

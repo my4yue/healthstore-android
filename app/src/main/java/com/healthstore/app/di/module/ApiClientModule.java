@@ -1,5 +1,6 @@
 package com.healthstore.app.di.module;
 
+import com.healthstore.app.FixVoidRespInterceptor;
 import com.healthstore.app.mvp.model.api.FeedbackService;
 import com.healthstore.app.mvp.model.api.UserService;
 import com.healthstore.app.mvp.model.api.VipService;
@@ -11,6 +12,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -22,10 +24,14 @@ public class ApiClientModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient(){
+    OkHttpClient provideOkHttpClient(FixVoidRespInterceptor fixVoidRespInterceptor){
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder()
                 .connectTimeout(60 * 1000, TimeUnit.MILLISECONDS)
                 .readTimeout(60 * 1000, TimeUnit.MILLISECONDS)
+                .addInterceptor(logging)
+                .addInterceptor(fixVoidRespInterceptor)
                 .build();
         return client;
     }

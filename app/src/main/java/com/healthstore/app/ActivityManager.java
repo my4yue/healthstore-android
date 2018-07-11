@@ -16,25 +16,27 @@ public class ActivityManager {
     @Inject public ActivityManager(){
     }
 
-    public void replaceFragment(AppFragment to) {
-        this.replaceFragment(to, true, true);
+    public void replaceFragment(int containerId, AppFragment to) {
+        this.replaceFragment(containerId, to, true, true);
     }
 
-    public void replaceFragment(AppFragment to, boolean useAnim, boolean addBackStack) {
+    public void replaceFragment(int containerId, AppFragment to, boolean useAnim, boolean addBackStack) {
         String tag = to.getClass().getSimpleName();
         FragmentTransaction tx = mAppActivity.getSupportFragmentManager().beginTransaction();
-        tx.replace(to.getContainerId(), to, tag);
 
         if (useAnim)
-            tx = tx.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.my_slide_in_left, R.anim.slide_out_right);
+           tx.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.my_slide_in_left, R.anim.slide_out_right);
+
+        tx.replace(containerId, to, tag);
+
         if (addBackStack)
-            tx =tx.addToBackStack(tag);
+            tx.addToBackStack(tag);
         tx.commit();
     }
 
-    void addFragment(AppFragment to) {
+    void addFragment(int containerId, AppFragment to) {
         FragmentTransaction tx = mAppActivity.getSupportFragmentManager().beginTransaction();
-        tx.add(to.getContainerId(), to);
+        tx.add(containerId, to);
         tx.commit();
     }
 

@@ -54,16 +54,11 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
                 .inject(this);
     }
 
-    @Override public void onUserUpdated(User user) {
-        Log.d(TAG, "已读取用户 - " + user.getUserName());
-        userAdapter.setUpUser(user);
-    }
-
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         iconView.setOnClickListener(v -> {
-            // todo: goto UserDetailFragment
+            mActivityManager.replaceFragment(mContainerId, new UserDetailsFragment());
         });
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
@@ -71,53 +66,6 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.HORIZONTAL));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
 
-        mPresenter.requestUser(1);
     }
-
-//    private class MeRecyclerViewAdapter extends RecyclerView.Adapter<ViewHolder> {
-//
-//        private final String[] arrayTitle = new String[]{"会员卡", "会籍资料", "商城", "我的设备", "反馈", "设置"};
-//        private final int[] arrayIcons = new int[]{R.mipmap.vip_card, R.mipmap.vip, R.mipmap.mall,
-//                R.mipmap.my_device, R.mipmap.feedback, R.mipmap.settings};
-//        private final Fragment[] arrayFragment = new Fragment[]{null, null, null, null, new UserFeedbackFragment(), null};
-//
-//        @NonNull
-//        @Override
-//        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//            View view = LayoutInflater.from(getContext()).inflate(R.layout.me_item_layout, null);
-//            return new ViewHolder(view);
-//        }
-//
-//        @Override
-//        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-//            holder.iv.setImageResource(arrayIcons[position]);
-//            holder.tv.setText(arrayTitle[position]);
-//            final Fragment targetFragment = arrayFragment[position];
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-////                    Toast.makeText(getContext(), holder.tv.getText(), Toast.LENGTH_SHORT).show();
-////                    if (targetFragment != null)
-////                        getFragmentController().startFragment(targetFragment);
-//                }
-//            });
-//        }
-//
-//        @Override
-//        public int getItemCount() {
-//            return arrayTitle.length;
-//        }
-//    }
-//
-//    class ViewHolder extends RecyclerView.ViewHolder {
-//
-//        @BindView(R.id.item_text) TextView tv;
-//        @BindView(R.id.item_icon) ImageView iv;
-//
-//        public ViewHolder(View itemView) {
-//            super(itemView);
-//            ButterKnife.bind(this, itemView);
-//        }
-//    }
 
 }

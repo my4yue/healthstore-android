@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.AppActivityLifeCycle;
+import com.healthstore.app.mvp.model.entity.User;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -20,6 +21,11 @@ public abstract class AppModule {
     static ObjectMapper providerObjectMapper(){
         return new ObjectMapper();
     }
+
+    @Singleton
+    @Provides
+//    @Named("user")
+    static User providerMainUser() {return new User(); }
 
     @Binds
     abstract Application.ActivityLifecycleCallbacks bindActivityLifecycle(AppActivityLifeCycle appActivityLifecycle);

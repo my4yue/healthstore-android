@@ -6,13 +6,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentController;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.healthstore.app.mvp.model.api.UserService;
+import com.healthstore.app.mvp.model.entity.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 @Singleton
 public class AppManager {
@@ -21,38 +29,42 @@ public class AppManager {
     private Activity mCurrentActivity;
 
     @Inject Application mApplication;
+    @Inject UserService mUserService;
+    @Inject ObjectMapper mObjectMapper;
 
     Toast mToast;
+    User mUser;
 
     @Inject
     public AppManager() {
 
     }
 
+    public void syncMainUser(){
+        mUserService.getUserById(1L)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(user -> {
+                    String userString = mObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
+                    Log.d("syncMainUser", userString);
+                    mUser = user;
+                });
+    }
+
     public void startActivity(Context ctx, Class activityClass) {
         Intent intent = new Intent(ctx, activityClass);
         ctx.startActivity(intent);
     }
-//
-//    public void startFragment(FragmentController controller, Fragment targetFragment) {
-//        String tag = targetFragment.getClass().getSimpleName();
-//        controller.getSupportFragmentManager()
-//                .beginTransaction()
-//                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left, R.anim.my_slide_in_left, R.anim.slide_out_right)
-//                .replace(R.id.content_view, targetFragment, tag)
-//                .addToBackStack(tag)
-//                .commit();
-//    }
-//
-//    public void popFragment(FragmentController controller) {
-//        controller.getSupportFragmentManager().popBackStackImmediate();
-//    }
 
     public void showToast(String message) {
         if (mToast == null)
             mToast = Toast.makeText(mApplication, "", Toast.LENGTH_SHORT);
         mToast.setText(message);
         mToast.show();
+    }
+
+    public User getMainUser() {
+        return mUser;
     }
 
 }

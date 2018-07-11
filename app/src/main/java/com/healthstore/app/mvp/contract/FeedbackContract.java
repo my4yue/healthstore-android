@@ -6,7 +6,9 @@ import com.healthstore.app.mvp.IView;
 public interface FeedbackContract {
 
     interface View extends IView {
-        void onResult();
+        void onSubmitSuccess();
+
+        void onSubmitFailed();
     }
 
     interface Model extends IModel {

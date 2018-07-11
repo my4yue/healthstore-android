@@ -5,11 +5,13 @@ import android.content.Context;
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.contract.FeedbackContract;
 import com.healthstore.app.mvp.model.FeedbackModel;
+import com.healthstore.app.mvp.model.api.FeedbackService;
 import com.healthstore.app.mvp.ui.activity.AppActivity;
 import com.healthstore.app.mvp.ui.fragment.AppFragment;
 
 import dagger.Module;
 import dagger.Provides;
+import retrofit2.Retrofit;
 
 @Module
 public class FeedbackModule {
@@ -28,6 +30,10 @@ public class FeedbackModule {
 
     @FragmentScope @Provides FeedbackContract.Model provideFeedbackModel(FeedbackModel model){
         return model;
+    }
+
+    @FragmentScope @Provides FeedbackService provideFeedbackService(Retrofit retrofit) {
+        return retrofit.create(FeedbackService.class);
     }
 
     @Provides @FragmentScope AppFragment provideAppFragment(){

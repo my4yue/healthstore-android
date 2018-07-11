@@ -7,7 +7,9 @@ import com.healthstore.app.AppDelegate;
 import com.healthstore.app.AppManager;
 import com.healthstore.app.di.module.ApiClientModule;
 import com.healthstore.app.di.module.AppModule;
+import com.healthstore.app.mvp.model.entity.User;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.BindsInstance;
@@ -27,6 +29,8 @@ public interface AppComponent {
     ObjectMapper objectMapper();
 
     Retrofit retrofit();
+
+    User user();
 
     @Component.Builder
     interface Builder{

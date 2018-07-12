@@ -9,6 +9,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
@@ -30,6 +31,7 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
 
     @BindView(R.id.recycler) RecyclerView recyclerView;
     @BindView(R.id.icon) QMUIRadiusImageView iconView;
+    @BindView(R.id.tv_user_name) TextView tvUserName;
 
     @Inject UserFuncIndexAdapter userAdapter;
 
@@ -48,6 +50,7 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mImageLoader.load(getContext(), mAppManager.getMainUser().getIconUrl(), iconView);
+        tvUserName.setText(mAppManager.getMainUser().getUserName());
 
         iconView.setOnClickListener(v -> {
             mActivityManager.replaceFragment(mContainerId, new UserDetailsFragment());

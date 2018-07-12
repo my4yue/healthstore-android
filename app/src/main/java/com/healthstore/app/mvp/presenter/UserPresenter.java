@@ -1,10 +1,7 @@
 package com.healthstore.app.mvp.presenter;
 
-import android.util.Log;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.AppManager;
-import com.healthstore.app.di.scope.ActivityScope;
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.IPresenter;
 import com.healthstore.app.mvp.contract.UserContract;
@@ -12,12 +9,7 @@ import com.healthstore.app.mvp.model.entity.User;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 @FragmentScope
@@ -38,11 +30,8 @@ public class UserPresenter implements IPresenter {
         mModel.updateUser(mainUser.getId(), user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(response -> {
-                    System.out.println(response.getErrorCode());
-                    mView.hideLoading();
-//                    mView.showMessage("保存成功");
-                });
+                .doFinally(() -> mView.hideLoading())
+                .subscribe(() -> mView.showMessage("保存成功"));
     }
 
     @Override public void onStart() {

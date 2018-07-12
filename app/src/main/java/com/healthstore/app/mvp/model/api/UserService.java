@@ -1,8 +1,8 @@
 package com.healthstore.app.mvp.model.api;
 
-import com.healthstore.app.mvp.model.entity.Response;
 import com.healthstore.app.mvp.model.entity.User;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -13,6 +13,6 @@ public interface UserService {
 
     @GET("user/{id}") Observable<User> getUserById(@Path("id") long id);
 
-    @PATCH("user/{id}") Observable<Response> patchUser(@Path("id") long id, @Body User user);
+    @PATCH("user/{id}") Completable patchUser(@Path("id") long id, @Body User user);
 
 }

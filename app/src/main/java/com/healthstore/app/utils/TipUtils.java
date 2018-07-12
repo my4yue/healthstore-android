@@ -10,7 +10,7 @@ public class TipUtils {
     static Handler handler = new Handler();
 
     public static QMUITipDialog provideLoadingTip(Context context) {
-        return new QMUITipDialog.Builder(context).setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING).create();
+        return new QMUITipDialog.Builder(context).setIconType(QMUITipDialog.Builder.ICON_TYPE_LOADING).setTipWord("请稍等").create();
     }
 
     public static void showTipDialog(Context context, String message) {

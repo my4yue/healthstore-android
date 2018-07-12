@@ -1,14 +1,13 @@
 package com.healthstore.app.mvp.model;
 
-import com.healthstore.app.di.scope.ActivityScope;
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.contract.UserContract;
 import com.healthstore.app.mvp.model.api.UserService;
-import com.healthstore.app.mvp.model.entity.Response;
 import com.healthstore.app.mvp.model.entity.User;
 
 import javax.inject.Inject;
 
+import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 @FragmentScope
@@ -23,7 +22,7 @@ public class UserModel implements UserContract.Model {
         return userService.getUserById(userId);
     }
 
-    @Override public Observable<Response> updateUser(long userId, User user) {
+    @Override public Completable updateUser(long userId, User user) {
         return userService.patchUser(userId, user);
     }
 

@@ -41,7 +41,7 @@ public class FeedbackPresenter implements IPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {
                     view.hideLoading();
-                    if (response.isSucceed())
+                    if (response.isSuccessful())
                         view.onSubmitSuccess();
                     else
                         view.onSubmitFailed();

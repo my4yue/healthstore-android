@@ -25,20 +25,16 @@ public class FormedRequestInterceptor implements Interceptor {
 
     @Inject ObjectMapper objectMapper;
 
-    @Inject public FormedRequestInterceptor() {
-    }
+    @Inject public FormedRequestInterceptor() { }
 
     @Override public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
         RequestBody body = request.body();
         if (body != null && body.contentType().subtype().contains("json")) {
-            long contentLength = request.body().contentLength();
-            String method = request.method();
             Buffer buf = new Buffer();
             request.body().writeTo(buf);
             String stringBody = buf.readString(Charset.forName("utf-8"));
-            System.out.println(stringBody);
             Map<String, String> map = objectMapper.readValue(stringBody, Map.class);
 
             stringBody = map.keySet().stream().map(k -> k + "=" + map.get(k).toString() + "&").collect(Collectors.joining());
@@ -53,7 +49,6 @@ public class FormedRequestInterceptor implements Interceptor {
                     sink.write(newStringBody.getBytes("utf-8"));
                 }
             }).build();
-
         }
 
         return chain.proceed(request);

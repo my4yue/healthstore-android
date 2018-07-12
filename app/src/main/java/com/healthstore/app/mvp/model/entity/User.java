@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.inject.Inject;
 
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class User extends Response {
+public class User {
 
     Long id;
     String userName;

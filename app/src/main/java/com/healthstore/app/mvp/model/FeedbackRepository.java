@@ -6,9 +6,9 @@ import com.healthstore.app.mvp.contract.FeedbackContract;
 import javax.inject.Inject;
 
 @FragmentScope
-public class FeedbackModel implements FeedbackContract.Model{
+public class FeedbackRepository implements FeedbackContract.Model{
 
-    @Inject public FeedbackModel(){
+    @Inject public FeedbackRepository(){
 
     }
 

@@ -11,12 +11,12 @@ import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 @FragmentScope
-public class UserModel implements UserContract.Model {
+public class UserRepository implements UserContract.Model {
 
     @Inject UserService userService;
 
     @Inject
-    public UserModel(){}
+    public UserRepository(){}
 
     @Override public Observable<User> getUserById(long userId) {
         return userService.getUserById(userId);

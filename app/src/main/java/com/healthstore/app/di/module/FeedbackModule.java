@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.contract.FeedbackContract;
-import com.healthstore.app.mvp.model.FeedbackModel;
+import com.healthstore.app.mvp.model.FeedbackRepository;
 import com.healthstore.app.mvp.model.api.FeedbackService;
 import com.healthstore.app.mvp.ui.activity.AppActivity;
 import com.healthstore.app.mvp.ui.fragment.AppFragment;
@@ -28,7 +28,7 @@ public class FeedbackModule {
         return mView;
     }
 
-    @FragmentScope @Provides FeedbackContract.Model provideFeedbackModel(FeedbackModel model){
+    @FragmentScope @Provides FeedbackContract.Model provideFeedbackModel(FeedbackRepository model){
         return model;
     }
 

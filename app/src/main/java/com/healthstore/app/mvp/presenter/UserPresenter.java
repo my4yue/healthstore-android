@@ -22,6 +22,7 @@ public class UserPresenter implements IPresenter {
 
     @Inject
     public UserPresenter() {
+
     }
 
     public void updateMainUser(User user){

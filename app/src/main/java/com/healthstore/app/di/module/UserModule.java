@@ -2,13 +2,11 @@ package com.healthstore.app.di.module;
 
 import android.content.Context;
 
-import com.healthstore.app.di.scope.ActivityScope;
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.contract.UserContract;
-import com.healthstore.app.mvp.model.UserModel;
+import com.healthstore.app.mvp.model.UserRepository;
 import com.healthstore.app.mvp.model.api.UserService;
 import com.healthstore.app.mvp.ui.activity.AppActivity;
-import com.healthstore.app.mvp.ui.adapter.UserFuncIndexAdapter;
 import com.healthstore.app.mvp.ui.fragment.AppFragment;
 
 import dagger.Module;
@@ -30,7 +28,7 @@ public class UserModule {
         return mView;
     }
 
-    @Provides @FragmentScope UserContract.Model provideUserModel(UserModel userModel){
+    @Provides @FragmentScope UserContract.Model provideUserModel(UserRepository userModel){
         return userModel;
     }
 

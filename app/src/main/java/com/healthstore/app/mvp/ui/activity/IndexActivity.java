@@ -48,8 +48,6 @@ public class IndexActivity extends AppActivity<IPresenter.Empty> {
 
         Log.d(TAG, "onCreate");
 
-//        getSupportFragmentManager().beginTransaction().replace(R.id.content_view, new UserIndexFragment()).commit();
-
         tabs = new ArrayList<>();
         tabs.add(tabAgenda);
         tabs.add(tabExpert);
@@ -62,7 +60,6 @@ public class IndexActivity extends AppActivity<IPresenter.Empty> {
         fragments.add(new Fragment());
         fragments.add(new UserIndexFragment());
 
-//        onSelected(tabAgenda);
         tabAgenda.performClick();
 
     }

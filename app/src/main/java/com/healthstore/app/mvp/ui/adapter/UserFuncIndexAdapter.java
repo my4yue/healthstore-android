@@ -85,7 +85,7 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
                 holder.tv.setText("商城");
                 holder.iv.setImageResource(R.mipmap.mall);
                 holder.itemView.setOnClickListener(v -> {
-                    mAppManager.showToast("敬请期待");
+                    mAppFragment.showMessage("敬请期待");
                 });
                 break;
             case 3:

@@ -71,7 +71,7 @@ public class UserDetailsFragment extends AppFragment<UserPresenter> implements U
                 .addItemView(ivName, v -> {
                     final QMUIDialog.EditTextDialogBuilder builder = new QMUIDialog.EditTextDialogBuilder(getActivity());
                     builder.setTitle("修改昵称")
-                            .setPlaceholder("在此输入您的昵称")
+                            .setPlaceholder(ivName.getDetailText().toString())
                             .setInputType(InputType.TYPE_CLASS_TEXT)
                             .addAction("取消", (dialog, index) -> dialog.dismiss())
                             .addAction("确定", (dialog, index) -> {

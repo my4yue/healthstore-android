@@ -6,6 +6,6 @@ public class UserPresenterTest {
 
     @Test
     public void testGetUser() throws Exception {
-        new UserPresenterImpl().getUser();
+
     }
 }

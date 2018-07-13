@@ -51,6 +51,7 @@ public class IndexPresenter implements IPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> view.hideLoading())
                 .subscribe(user -> {
+                    System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(user));;
                     appManager.getMainUser().setValue(user);
                     view.hideLoading();
                 });

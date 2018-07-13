@@ -1,6 +1,13 @@
 package com.healthstore.app.mvp.model.entity;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class User implements Entity {
 
@@ -16,6 +23,7 @@ public class User implements Entity {
     Boolean isVip;
     Boolean receiveActivityTrailer;
     String imUserId;
+    @JsonSerialize(using = AttentionItemSerializer.class)
     List<Item> attentionItems;
 
     public Long getId() {
@@ -112,6 +120,15 @@ public class User implements Entity {
 
     public List<Item> getAttentionItems() {
         return attentionItems;
+    }
+
+    private static class AttentionItemSerializer extends JsonSerializer<List<Item>> {
+        @Override
+        public void serialize(List<Item> value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            String itemIds = value.stream().map(item -> item.getItemId() + ",").collect(Collectors.joining());
+            itemIds = itemIds.substring(0, itemIds.lastIndexOf(","));
+            gen.writeString(itemIds);
+        }
     }
 
 }

@@ -1,5 +1,7 @@
 package com.healthstore.app.mvp.model.entity;
 
+import java.util.List;
+
 public class User implements Entity {
 
     Long id;
@@ -14,6 +16,7 @@ public class User implements Entity {
     Boolean isVip;
     Boolean receiveActivityTrailer;
     String imUserId;
+    List<Item> attentionItems;
 
     public Long getId() {
         return id;
@@ -105,6 +108,10 @@ public class User implements Entity {
 
     public void setImUserId(String imUserId) {
         this.imUserId = imUserId;
+    }
+
+    public List<Item> getAttentionItems() {
+        return attentionItems;
     }
 
 }

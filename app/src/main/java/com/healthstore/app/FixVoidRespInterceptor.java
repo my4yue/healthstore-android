@@ -30,6 +30,7 @@ public class FixVoidRespInterceptor implements Interceptor {
     }
 
     @Override public Response intercept(Chain chain) throws IOException {
+        System.out.println("interceptor - " + Thread.currentThread().getName());
         Response response = chain.proceed(chain.request());
         ResponseBody body = response.body();
         long contentLength = body.contentLength();

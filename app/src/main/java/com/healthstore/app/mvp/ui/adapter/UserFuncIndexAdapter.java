@@ -21,6 +21,7 @@ import com.healthstore.app.mvp.model.entity.User;
 import com.healthstore.app.mvp.ui.activity.AppActivity;
 import com.healthstore.app.mvp.ui.fragment.AppFragment;
 import com.healthstore.app.mvp.ui.fragment.UserFeedbackFragment;
+import com.healthstore.app.mvp.ui.fragment.UserSettingsFragment;
 
 import javax.inject.Inject;
 
@@ -61,6 +62,7 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
                 holder.fragment = new Fragment();
                 holder.tv.setText("会籍资料");
                 holder.iv.setImageResource(R.mipmap.vip);
+
                 mAppManager.getMainUser().observe(mAppActivity, user -> {
                     if (!user.isVip()) {
                         holder.iv.setColorFilter(Color.GRAY);
@@ -107,7 +109,7 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
                 holder.tv.setText("设置");
                 holder.iv.setImageResource(R.mipmap.settings);
                 holder.itemView.setOnClickListener(v -> {
-                    // todo: goto SettingsFragment
+                    mActivityManager.replaceFragment(mAppFragment.getContainerId(), new UserSettingsFragment());
                 });
                 break;
         }
@@ -128,14 +130,6 @@ public class UserFuncIndexAdapter extends RecyclerView.Adapter<UserFuncIndexAdap
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-        }
-
-        void disable(){
-
-        }
-
-        void enable(){
-
         }
     }
 

@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.schedulers.Schedulers;
 
 @ActivityScope
@@ -39,7 +40,6 @@ public class IndexPresenter implements IPresenter {
     public void initData() {
         Observable<User> obUser = userService.getUserById(1);
         Observable<List<Item>> obItems = itemService.getItems(null);
-
         Observable
                 .zip(obUser, obItems, (user, items) -> {
                     itemCache.updateCache(items);

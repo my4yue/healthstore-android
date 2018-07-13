@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="btn_save_user" type="id" />
+    <item name="btn_save_user_item" type="id" />
 </resources>

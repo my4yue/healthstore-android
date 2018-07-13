@@ -1,10 +1,15 @@
 <resources>
 
     <style name="AppTheme" parent="QMUI.Compat.NoActionBar">
-        <!-- 配置qmui提供的theme -->
-        <!--<item name="qmui_round_btn_text_size">@dimen/qmui_btn_text_size</item>-->
-        <!--<item name="qmui_round_btn_border_width">@dimen/qmui_btn_border_width</item>-->
-        <!--<item name="qmui_round_btn_bg_color">@android:color/black</item>-->
+
+        <item name="qmui_tip_dialog_min_width">56dp</item>
+        <item name="qmui_tip_dialog_min_height">56dp</item>
+
+        <item name="qmui_common_list_item_title_h_text_size">14sp</item>
+        <item name="qmui_common_list_item_detail_h_text_size">14sp</item>
+        <item name="qmui_list_item_height">45dp</item>
+        <item name="qmui_list_item_height_higher">90dp</item>
+
         <item name="qmui_round_btn_border_color">@android:color/black</item>
         <item name="qmui_round_btn_text_color">@android:color/black</item>
 
@@ -14,7 +19,19 @@
 
         <item name="QMUITopBarStyle">@style/App.TopBar</item>
         <item name="QMUICommonListItemViewStyle">@style/App.CommonList.ItemView</item>
+        <item name="QMUIGroupListSectionViewStyle">@style/AppGroupListSectionView</item>
 
+    </style>
+
+    <style name="AppGroupListSectionView">
+        <item name="android:paddingLeft">?attr/qmui_content_padding_horizontal</item>
+        <item name="android:paddingRight">?attr/qmui_content_padding_horizontal</item>
+        <item name="android:paddingTop">
+            @dimen/qmui_group_list_section_header_footer_padding_vertical
+        </item>
+        <item name="android:paddingBottom">
+            @dimen/qmui_group_list_section_header_footer_padding_vertical
+        </item>
     </style>
 
     <style name="App.TopBar" parent="QMUI.TopBar">
@@ -31,9 +48,9 @@
     </style>
 
     <style name="App.CommonList.ItemView" parent="QMUI.CommonListItemView">
-        <!--<item name="android:paddingLeft">?attr/qmui_content_padding_horizontal</item>-->
-        <!--<item name="android:paddingRight">?attr/qmui_content_padding_horizontal</item>-->
-        <!--<item name="android:background">?attr/qmui_s_list_item_bg_with_border_none</item>-->
+        <item name="android:paddingLeft">?attr/qmui_content_padding_horizontal</item>
+        <item name="android:paddingRight">?attr/qmui_content_padding_horizontal</item>
+        <item name="android:height">5dp</item>
         <item name="qmui_commonList_titleColor">?attr/qmui_config_color_gray_1</item>
         <item name="qmui_commonList_detailColor">?attr/qmui_config_color_gray_1</item>
     </style>

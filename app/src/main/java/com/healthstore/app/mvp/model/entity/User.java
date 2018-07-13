@@ -1,11 +1,6 @@
 package com.healthstore.app.mvp.model.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
-import javax.inject.Inject;
-
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class User {
+public class User implements Entity {
 
     Long id;
     String userName;
@@ -13,7 +8,7 @@ public class User {
     String wechatOpenId;
     String wechatUnionId;
     String iconUrl;
-    String gender;
+    Gender gender;
     String district;
     String agendaBackgroundImageUrl;
     Boolean isVip;
@@ -64,11 +59,11 @@ public class User {
         this.iconUrl = iconUrl;
     }
 
-    public String getGender() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

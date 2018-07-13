@@ -10,8 +10,11 @@ import com.healthstore.app.AppManager;
 import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.mvp.IPresenter;
+import com.healthstore.app.mvp.IView;
 import com.healthstore.app.utils.AppUtils;
+import com.healthstore.app.utils.TipUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import javax.inject.Inject;
 
@@ -19,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.Optional;
 import butterknife.Unbinder;
 
-public abstract class AppActivity<P extends IPresenter> extends AppCompatActivity {
+public abstract class AppActivity<P extends IPresenter> extends AppCompatActivity implements IView{
 
     abstract int contentViewId();
 
@@ -30,6 +33,8 @@ public abstract class AppActivity<P extends IPresenter> extends AppCompatActivit
     private static final String TAG = AppActivity.class.getSimpleName();
 
     private Unbinder mUnbinder;
+
+    QMUITipDialog loadingTipDialog;
 
     @Inject AppManager mAppManager;
     @Inject @Nullable P mPresenter;
@@ -45,6 +50,7 @@ public abstract class AppActivity<P extends IPresenter> extends AppCompatActivit
         }
 
         setupActivityComponent(AppUtils.obtainAppComponentFromContext(this));
+        loadingTipDialog = TipUtils.provideLoadingTip(this);
 
         QMUIStatusBarHelper.translucent(this);
     }
@@ -60,6 +66,14 @@ public abstract class AppActivity<P extends IPresenter> extends AppCompatActivit
         if (mPresenter != null)
             mPresenter.onDestroy();
         mPresenter = null;
+    }
+
+    @Override public void showLoading() {
+        loadingTipDialog.show();
+    }
+
+    @Override public void hideLoading() {
+        loadingTipDialog.dismiss();
     }
 
 }

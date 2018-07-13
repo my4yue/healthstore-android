@@ -49,12 +49,13 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mImageLoader.load(getContext(), mAppManager.getMainUser().getIconUrl(), iconView);
-        tvUserName.setText(mAppManager.getMainUser().getUserName());
 
-        iconView.setOnClickListener(v -> {
-            mActivityManager.replaceFragment(mContainerId, new UserDetailsFragment());
+        mAppManager.getMainUser().observe(this, user -> {
+            mImageLoader.load(getContext(), user.getIconUrl(), iconView);
+            tvUserName.setText(user.getUserName());
         });
+
+        iconView.setOnClickListener(v -> mActivityManager.replaceFragment(mContainerId, new UserDetailsFragment()));
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 3));
         recyclerView.setAdapter(userAdapter);

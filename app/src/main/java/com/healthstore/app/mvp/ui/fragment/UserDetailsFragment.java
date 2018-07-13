@@ -15,6 +15,7 @@ import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.di.component.DaggerUserComponent;
 import com.healthstore.app.di.module.UserModule;
 import com.healthstore.app.mvp.contract.UserContract;
+import com.healthstore.app.mvp.model.entity.Gender;
 import com.healthstore.app.mvp.model.entity.User;
 import com.healthstore.app.mvp.presenter.UserPresenter;
 import com.qmuiteam.qmui.widget.QMUIRadiusImageView;
@@ -58,7 +59,7 @@ public class UserDetailsFragment extends AppFragment<UserPresenter> implements U
         topBar.addRightTextButton(R.string.save, R.id.btn_save_user)
                 .setOnClickListener(v -> {
                     User user = new User();
-                    user.setGender(ivSex.getDetailText().toString());
+                    user.setGender(Gender.from(ivSex.getDetailText().toString()));
                     user.setUserName(ivName.getDetailText().toString());
                     user.setDistrict(ivDistrict.getDetailText().toString());
 
@@ -98,12 +99,15 @@ public class UserDetailsFragment extends AppFragment<UserPresenter> implements U
                 .addItemView(ivDistrict, null)
                 .addTo(meListView);
 
-        User user = mAppManager.getMainUser();
-        ivName.setDetailText(user.getUserName());
-        ivSex.setDetailText(user.getGender());
-        ivDistrict.setDetailText(user.getDistrict());
+        mAppManager.getMainUser().observe(this, user->{
+            ivName.setDetailText(user.getUserName());
+            ivSex.setDetailText(user.getGender().desc());
+            ivDistrict.setDetailText(user.getDistrict());
+            mImageLoader.load(getContext(), user.getIconUrl(), iconView);
+        });
 
-        mImageLoader.load(getContext(), mAppManager.getMainUser().getIconUrl(), iconView);
+
+
     }
 
 }

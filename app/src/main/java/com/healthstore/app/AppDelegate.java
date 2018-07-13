@@ -27,7 +27,7 @@ public class AppDelegate {
         mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(app)).build();
         mAppComponent.inject(this);
 
-        mAppManager.syncMainUser();
+//        mAppManager.syncMainUser();
         mApp.registerActivityLifecycleCallbacks(mAppActivityLifeCycle);
     }
 

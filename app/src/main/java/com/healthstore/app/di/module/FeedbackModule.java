@@ -32,9 +32,9 @@ public class FeedbackModule {
         return model;
     }
 
-    @FragmentScope @Provides FeedbackService provideFeedbackService(Retrofit retrofit) {
-        return retrofit.create(FeedbackService.class);
-    }
+//    @FragmentScope @Provides FeedbackService provideFeedbackService(Retrofit retrofit) {
+//        return retrofit.create(FeedbackService.class);
+//    }
 
     @Provides @FragmentScope AppFragment provideAppFragment(){
         return (AppFragment) mView;

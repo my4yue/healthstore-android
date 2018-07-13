@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.FixVoidRespInterceptor;
 import com.healthstore.app.FormedRequestInterceptor;
 import com.healthstore.app.mvp.model.api.FeedbackService;
+import com.healthstore.app.mvp.model.api.ItemService;
 import com.healthstore.app.mvp.model.api.UserService;
 import com.healthstore.app.mvp.model.api.VipService;
 
@@ -69,5 +70,10 @@ public class ApiClientModule {
         return retrofit.create(VipService.class);
     }
 
+    @Provides
+    @Singleton
+    protected ItemService provideItemService(Retrofit retrofit){
+        return retrofit.create(ItemService.class);
+    }
 
 }

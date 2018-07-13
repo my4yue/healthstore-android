@@ -2,6 +2,8 @@ package com.healthstore.app;
 
 import android.app.Activity;
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -33,7 +35,7 @@ public class AppManager {
     @Inject ObjectMapper mObjectMapper;
 
     Toast mToast;
-    User mUser;
+    MutableLiveData<User> mUser = new MutableLiveData<>();
 
     @Inject
     public AppManager() {
@@ -47,7 +49,7 @@ public class AppManager {
                 .subscribe(user -> {
                     String userString = mObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(user);
                     Log.d("syncMainUser", userString);
-                    mUser = user;
+                    mUser.setValue(user);
                 });
     }
 
@@ -63,7 +65,7 @@ public class AppManager {
         mToast.show();
     }
 
-    public User getMainUser() {
+    public MutableLiveData<User> getMainUser() {
         return mUser;
     }
 

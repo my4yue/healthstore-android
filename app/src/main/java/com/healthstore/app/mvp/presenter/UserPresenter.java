@@ -27,7 +27,7 @@ public class UserPresenter implements IPresenter {
 
     public void updateMainUser(User user){
         mView.showLoading();
-        User mainUser = appManager.getMainUser();
+        User mainUser = appManager.getMainUser().getValue();
         mModel.updateUser(mainUser.getId(), user)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

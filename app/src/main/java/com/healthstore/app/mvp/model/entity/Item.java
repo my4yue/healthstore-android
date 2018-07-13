@@ -1,6 +1,10 @@
 package com.healthstore.app.mvp.model.entity;
 
-public class Item {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+//@JsonIgnoreProperties(ignoreUnknown=true)
+public class Item implements Entity{
 
     private String itemId;
     private String name;

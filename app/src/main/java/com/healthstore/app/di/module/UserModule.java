@@ -32,9 +32,9 @@ public class UserModule {
         return userModel;
     }
 
-    @Provides @FragmentScope UserService provideUserService(Retrofit retrofit){
-        return retrofit.create(UserService.class);
-    }
+//    @Provides @FragmentScope UserService provideUserService(Retrofit retrofit){
+//        return retrofit.create(UserService.class);
+//    }
 
 //    @Provides @FragmentScope Context provideContext(){
 //        return mContext;

@@ -36,7 +36,7 @@ public class FeedbackPresenter implements IPresenter {
 
     public void submit(String text) {
         view.showLoading();
-        feedbackService.submitFeedback(appManager.getMainUser().getId(), text)
+        feedbackService.submitFeedback(appManager.getMainUser().getValue().getId(), text)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response -> {

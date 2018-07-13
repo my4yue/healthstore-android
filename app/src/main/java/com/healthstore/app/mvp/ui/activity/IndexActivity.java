@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.di.component.DaggerIndexComponent;
-import com.healthstore.app.mvp.IPresenter;
+import com.healthstore.app.di.module.IndexModule;
+import com.healthstore.app.mvp.contract.IndexContract;
+import com.healthstore.app.mvp.presenter.IndexPresenter;
 import com.healthstore.app.mvp.ui.fragment.UserIndexFragment;
 import com.healthstore.app.utils.LogUtils;
 import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
@@ -24,7 +26,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class IndexActivity extends AppActivity<IPresenter.Empty> {
+public class IndexActivity extends AppActivity<IndexPresenter> implements IndexContract.View {
 
     @BindView(R.id.content_view) View contentView;
 
@@ -60,8 +62,9 @@ public class IndexActivity extends AppActivity<IPresenter.Empty> {
         fragments.add(new Fragment());
         fragments.add(new UserIndexFragment());
 
-        tabAgenda.performClick();
+        mPresenter.initData();
 
+        tabAgenda.performClick();
     }
 
     @OnClick({R.id.tab_agenda, R.id.tab_expert, R.id.tab_health, R.id.tab_me})
@@ -110,6 +113,6 @@ public class IndexActivity extends AppActivity<IPresenter.Empty> {
 
     @Override
     void setupActivityComponent(AppComponent appComponent) {
-        DaggerIndexComponent.builder().appComponent(appComponent).build().inject(this);
+        DaggerIndexComponent.builder().appComponent(appComponent).indexModule(new IndexModule(this)).build().inject(this);
     }
 }

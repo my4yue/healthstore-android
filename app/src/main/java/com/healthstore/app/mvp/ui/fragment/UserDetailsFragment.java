@@ -86,9 +86,10 @@ public class UserDetailsFragment extends AppFragment<UserPresenter> implements U
                             .create().show();
                 })
                 .addItemView(ivSex, v->{
-                    new QMUIBottomSheet.BottomListSheetBuilder(getContext())
-                            .addItem("男")
-                            .addItem("女")
+                    new QMUIBottomSheet.BottomListSheetBuilder(getContext(), true)
+                            .setCheckedIndex(Gender.from(ivSex.getText().toString()).order())
+                            .addItem(Gender.M.desc())
+                            .addItem(Gender.F.desc())
                             .setOnSheetItemClickListener((dialog, itemView, position, tag) -> {
                                 ivSex.setDetailText(tag);
                                 dialog.dismiss();

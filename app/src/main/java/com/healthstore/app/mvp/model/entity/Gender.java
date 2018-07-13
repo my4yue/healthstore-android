@@ -4,12 +4,18 @@ import java.util.Arrays;
 
 public enum Gender {
 
-    M("男"), F("女");
+    M("男", 0), F("女", 1);
 
     private String desc;
+    private int order;
 
-    Gender(String desc) {
+    Gender(String desc, int order) {
         this.desc = desc;
+        this.order = order;
+    }
+
+    public int order() {
+        return order;
     }
 
     public String desc(){

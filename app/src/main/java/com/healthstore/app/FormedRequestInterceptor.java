@@ -35,7 +35,7 @@ public class FormedRequestInterceptor implements Interceptor {
             Buffer buf = new Buffer();
             request.body().writeTo(buf);
             String stringBody = buf.readString(Charset.forName("utf-8"));
-            Map<String, String> map = objectMapper.readValue(stringBody, Map.class);
+            Map<String, Object> map = objectMapper.readValue(stringBody, Map.class);
 
             stringBody = map.keySet().stream().map(k -> k + "=" + map.get(k).toString() + "&").collect(Collectors.joining());
             final String newStringBody = stringBody.substring(0, stringBody.lastIndexOf("&"));

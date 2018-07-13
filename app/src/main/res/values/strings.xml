@@ -2,10 +2,13 @@
     <string name="app_name">惠尔仕健康</string>
 
     <string name="submit">提交</string>
+    <string name="logout">退出账户</string>
 
     <string name="feedback_title">反馈</string>
     <string name="feedback_edit_hint">期待您的反馈，不超过200字</string>
     <string name="save">保存</string>
+    <string name="app_instruction_title">产品详细标题</string>
+    <string name="app_instruction_details">产品详细介绍</string>
 
     <string-array name="me_function_name">
         <item>会员卡</item>

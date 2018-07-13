@@ -91,14 +91,10 @@ public class IndexActivity extends AppActivity<IndexPresenter> implements IndexC
         tv.setTextColor(colorSelected);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.content_view, fragments.get(index)).commit();
-
-        LogUtils.toast(this, tv.getText());
-
     }
 
     @OnClick(R.id.btn_add_record)
     public void onAddRecord() {
-        LogUtils.toast(this, "添加健康记录");
     }
 
     @Override

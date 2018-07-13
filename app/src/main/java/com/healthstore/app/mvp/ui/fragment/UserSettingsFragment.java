@@ -18,6 +18,7 @@ import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class UserSettingsFragment extends AppFragment<UserPresenter> implements UserContract.View {
 
@@ -36,6 +37,11 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
                 .inject(this);
     }
 
+    @OnClick(R.id.btn_logout)
+    public void onClickLogout(){
+
+    }
+
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -50,13 +56,6 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
 
         QMUICommonListItemView activityNotify = userSettings.createItemView("接收活动通知");
         activityNotify.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_SWITCH);
-        activityNotify.getSwitch().setOnCheckedChangeListener((buttonView, isChecked) -> {
-            mPresenter.updateMainUser(new User(){
-                @Override public Boolean isReceiveActivityTrailer() {
-                    return isChecked;
-                }
-            });
-        });
 
         QMUICommonListItemView instruction = userSettings.createItemView("使用说明");
         instruction.setAccessoryType(QMUICommonListItemView.ACCESSORY_TYPE_CHEVRON);
@@ -70,14 +69,22 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
         version.getDetailTextView().setTextColor(Color.GRAY);
 
         QMUIGroupListView.newSection(this.getContext())
-                .addItemView(agendaBack, v -> {
-                })
+                .addItemView(agendaBack, v -> {})
                 .addItemView(itemSetting, v -> mActivityManager.replaceFragment(getContainerId(), new UserItemSelectorFragment()))
                 .addItemView(activityNotify, v -> {})
-                .addItemView(instruction, v -> {})
-                .addItemView(clearCache, v->{})
-                .addItemView(version, v->{})
+                .addItemView(instruction, v -> { mActivityManager.replaceFragment(getContainerId(), new AppInstructionFragment()); })
+                .addItemView(clearCache, v -> {})
+                .addItemView(version, v -> {})
                 .addTo(userSettings);
+
+        activityNotify.getSwitch().setChecked(mAppManager.getMainUser().getValue().isReceiveActivityTrailer());
+        activityNotify.getSwitch().setOnCheckedChangeListener((buttonView, isChecked) -> {
+            mPresenter.updateMainUser(new User() {
+                @Override public Boolean isReceiveActivityTrailer() {
+                    return isChecked;
+                }
+            });
+        });
     }
 
 }

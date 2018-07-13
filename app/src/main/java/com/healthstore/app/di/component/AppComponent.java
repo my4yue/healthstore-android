@@ -13,6 +13,7 @@ import com.healthstore.app.mvp.model.api.ItemService;
 import com.healthstore.app.mvp.model.api.UserService;
 import com.healthstore.app.mvp.model.cache.ItemCache;
 import com.healthstore.app.mvp.model.entity.User;
+import com.healthstore.app.mvp.ui.fragment.AppFragment;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import javax.inject.Named;

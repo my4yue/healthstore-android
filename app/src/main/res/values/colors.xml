@@ -5,6 +5,7 @@
     <color name="app_color_accent">#ff4081</color>
 
     <color name="app_grey">#EEEEEE</color>
+    <color name="app_green">#ff18A555</color>
     <color name="app_grey_dark">#333333</color>
     <color name="app_grey_light">#ffffff</color>
 

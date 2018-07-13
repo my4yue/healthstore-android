@@ -32,7 +32,7 @@ public class UserPresenter implements IPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> mView.hideLoading())
-                .subscribe(() -> mView.showMessage("保存成功"));
+                .subscribe(() -> {});
     }
 
     @Override public void onStart() {

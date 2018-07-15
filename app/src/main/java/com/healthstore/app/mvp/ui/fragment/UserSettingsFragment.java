@@ -1,10 +1,22 @@
 package com.healthstore.app.mvp.ui.fragment;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -18,6 +30,8 @@ import com.healthstore.app.mvp.presenter.UserPresenter;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -103,6 +117,53 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult - " + requestCode + " - " + resultCode);
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+//            headImageView.setImageURI(Uri.fromFile(file));
+//
+            Bitmap bitmap = data.getParcelableExtra("data");
+            //在手机相册中显示刚拍摄的图片
+            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//            Uri contentUri = Uri.fromFile(file);
+//            mediaScanIntent.setData(contentUri);
+//            sendBroadcast(mediaScanIntent);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.d(TAG, "onRequestPermissionsResult - " + requestCode + " - " + permissions[0]);
+        Log.d(TAG, "onRequestPermissionsResult - " + requestCode + " - " + grantResults[0]);
+        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            useCamera();
+        } else {
+            // 没有获取 到权限，从新请求，或者关闭app
+//            Toast.makeText(this, "需要存储权限", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    void useCamera() {
+        // 跳转到系统的拍照界面
+        Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // 指定照片存储位置为sd卡本目录下
+        // 这里设置为固定名字 这样就只会只有一张temp图 如果要所有中间图片都保存可以通过时间或者加其他东西设置图片的名称
+        // File.separator为系统自带的分隔符 是一个固定的常量
+//        File imageFile = new File(getActivity().getFilesDir() + "/images" + "health.jpeg");
+//        // 获取图片所在位置的Uri路径    *****这里为什么这么做参考问题2*****
+//        /*imageUri = Uri.fromFile(new File(mTempPhotoPath));*/
+//        Uri imageUri = FileProvider.getUriForFile(getContext(),
+//                getActivity().getApplicationContext().getPackageName() +".fp",
+//                imageFile);
+//        //下面这句指定调用相机拍照后的照片存储的路径
+//        intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intentToTakePhoto, 1);
+    }
+
     abstract class BottomSheetActionList{
         @OnClick(R.id.btn_server)
         void OnClickBtnServer(){
@@ -117,7 +178,14 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
 
         @OnClick(R.id.btn_take_photo)
         void OnClickBtnTakePhoto(){
-            System.out.println("click take photo");
+            int granted = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA);
+            if (granted == PackageManager.PERMISSION_GRANTED) {
+                //调用相机
+                useCamera();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.CAMERA}, 1);
+            }
+
         }
 
         abstract BottomSheetDialog getBottomDialog();

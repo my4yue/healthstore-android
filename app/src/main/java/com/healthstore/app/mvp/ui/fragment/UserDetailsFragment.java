@@ -7,9 +7,6 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.Toast;
 
-//import com.bumptech.glide.Glide;
-//import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
-//import com.bumptech.glide.request.RequestOptions;
 import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.di.component.DaggerUserComponent;
@@ -104,7 +101,7 @@ public class UserDetailsFragment extends AppFragment<UserPresenter> implements U
             ivName.setDetailText(user.getUserName());
             ivSex.setDetailText(user.getGender().desc());
             ivDistrict.setDetailText(user.getDistrict());
-            mImageLoader.load(getContext(), user.getIconUrl(), iconView);
+            mImageLoader.loadIcon(getContext(), user.getIconUrl(), iconView);
         });
 
 

@@ -51,7 +51,7 @@ public class UserIndexFragment extends AppFragment<UserPresenter> implements Use
         super.onViewCreated(view, savedInstanceState);
 
         mAppManager.getMainUser().observe(this, user -> {
-            mImageLoader.load(getContext(), user.getIconUrl(), iconView);
+            mImageLoader.loadIcon(getContext(), user.getIconUrl(), iconView);
             tvUserName.setText(user.getUserName());
         });
 

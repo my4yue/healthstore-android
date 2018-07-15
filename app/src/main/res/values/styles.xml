@@ -10,8 +10,8 @@
         <item name="qmui_list_item_height">45dp</item>
         <item name="qmui_list_item_height_higher">90dp</item>
 
-        <item name="qmui_round_btn_border_color">@android:color/black</item>
-        <item name="qmui_round_btn_text_color">@android:color/black</item>
+        <item name="qmui_round_btn_border_color">@color/app_green</item>
+        <item name="qmui_round_btn_text_color">@color/app_green</item>
 
         <item name="qmui_dialog_action_style">@style/App.Dialog.Action</item>
         <item name="qmui_dialog_edit_content_style">@style/App.Dialog.EditContent</item>

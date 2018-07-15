@@ -13,10 +13,18 @@ public class ImageLoader {
 
     @Inject public ImageLoader() { }
 
-    public void load(Context context, String url, ImageView imageView) {
+    public void loadIcon(Context context, String url, ImageView imageView) {
         Picasso.with(context)
                 .load(url)
                 .placeholder(R.mipmap.icon_placeholder)
+                .fit()
+                .into(imageView);
+    }
+
+    public void loadPicture(Context context, String url, ImageView imageView) {
+        Picasso.with(context)
+                .load(url)
+                .placeholder(R.mipmap.default_place_holder)
                 .fit()
                 .into(imageView);
     }

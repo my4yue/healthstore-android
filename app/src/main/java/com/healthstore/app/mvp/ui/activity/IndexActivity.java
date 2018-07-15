@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.healthstore.app.NavigationBarProvider;
 import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.di.component.DaggerIndexComponent;
@@ -26,7 +27,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class IndexActivity extends AppActivity<IndexPresenter> implements IndexContract.View {
+public class IndexActivity extends AppActivity<IndexPresenter> implements IndexContract.View, NavigationBarProvider {
 
     @BindView(R.id.content_view) View contentView;
 
@@ -110,5 +111,15 @@ public class IndexActivity extends AppActivity<IndexPresenter> implements IndexC
     @Override
     void setupActivityComponent(AppComponent appComponent) {
         DaggerIndexComponent.builder().appComponent(appComponent).indexModule(new IndexModule(this)).build().inject(this);
+    }
+
+    @Override
+    public void showNavigationBar() {
+
+    }
+
+    @Override
+    public void hideNavigationBar() {
+
     }
 }

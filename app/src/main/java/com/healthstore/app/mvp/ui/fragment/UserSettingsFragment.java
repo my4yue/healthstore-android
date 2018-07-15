@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import com.healthstore.app.R;
@@ -18,6 +20,7 @@ import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UserSettingsFragment extends AppFragment<UserPresenter> implements UserContract.View {
@@ -68,8 +71,20 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
         version.setDetailText("1.0.0");
         version.getDetailTextView().setTextColor(Color.GRAY);
 
+        BottomSheetDialog bottomSheet = new BottomSheetDialog(getContext());
+        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.view_agenda_bg_actions, null);
+        ButterKnife.bind(new BottomSheetActionList() {
+            @Override
+            BottomSheetDialog getBottomDialog() {
+                return bottomSheet;
+            }
+        }, inflate);
+        bottomSheet.setCanceledOnTouchOutside(true);
+        bottomSheet.setContentView(inflate);
+        bottomSheet.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundResource(android.R.color.transparent);
+
         QMUIGroupListView.newSection(this.getContext())
-                .addItemView(agendaBack, v -> {})
+                .addItemView(agendaBack, v -> {bottomSheet.show();})
                 .addItemView(itemSetting, v -> mActivityManager.replaceFragment(getContainerId(), new UserItemSelectorFragment()))
                 .addItemView(activityNotify, v -> {})
                 .addItemView(instruction, v -> { mActivityManager.replaceFragment(getContainerId(), new AppInstructionFragment()); })
@@ -85,6 +100,27 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
                 }
             });
         });
+
+    }
+
+    abstract class BottomSheetActionList{
+        @OnClick(R.id.btn_server)
+        void OnClickBtnServer(){
+            getBottomDialog().dismiss();
+            mActivityManager.replaceFragment(getContainerId(), new PictureSelectorFragment());
+        }
+
+        @OnClick(R.id.btn_local)
+        void OnClickBtnLocal(){
+            System.out.println("click local");
+        }
+
+        @OnClick(R.id.btn_take_photo)
+        void OnClickBtnTakePhoto(){
+            System.out.println("click take photo");
+        }
+
+        abstract BottomSheetDialog getBottomDialog();
     }
 
 }

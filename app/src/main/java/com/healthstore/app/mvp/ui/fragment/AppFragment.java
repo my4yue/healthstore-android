@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 
 import com.healthstore.app.ActivityManager;
 import com.healthstore.app.AppManager;
@@ -21,7 +19,6 @@ import com.healthstore.app.utils.TipUtils;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;

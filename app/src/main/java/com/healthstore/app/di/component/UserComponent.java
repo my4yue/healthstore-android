@@ -6,6 +6,7 @@ import com.healthstore.app.di.module.UserModule;
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.contract.UserContract;
 import com.healthstore.app.mvp.ui.fragment.AppFragment;
+import com.healthstore.app.mvp.ui.fragment.AppInstructionFragment;
 import com.healthstore.app.mvp.ui.fragment.UserDetailsFragment;
 import com.healthstore.app.mvp.ui.fragment.UserFeedbackFragment;
 import com.healthstore.app.mvp.ui.fragment.UserIndexFragment;
@@ -23,5 +24,5 @@ public interface UserComponent {
     void inject(UserDetailsFragment userDetailsFragment);
     void inject(UserSettingsFragment userSettingsFragment);
     void inject(UserItemSelectorFragment userItemSelectorFragment);
-
+    void inject(AppInstructionFragment appInstructionFragment);
 }

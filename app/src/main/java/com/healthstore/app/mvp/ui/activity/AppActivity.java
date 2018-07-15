@@ -2,12 +2,10 @@ package com.healthstore.app.mvp.ui.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.healthstore.app.AppManager;
-import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.mvp.IPresenter;
 import com.healthstore.app.mvp.IView;

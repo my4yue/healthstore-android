@@ -10,16 +10,12 @@ import com.healthstore.app.di.module.ApiClientModule;
 import com.healthstore.app.di.module.AppModule;
 import com.healthstore.app.mvp.model.api.FeedbackService;
 import com.healthstore.app.mvp.model.api.ItemService;
+import com.healthstore.app.mvp.model.api.PicService;
 import com.healthstore.app.mvp.model.api.UserService;
 import com.healthstore.app.mvp.model.cache.ItemCache;
-import com.healthstore.app.mvp.model.entity.User;
-import com.healthstore.app.mvp.ui.fragment.AppFragment;
-import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
-import dagger.BindsInstance;
 import dagger.Component;
 import retrofit2.Retrofit;
 
@@ -43,6 +39,9 @@ public interface AppComponent {
     UserService userService();
     FeedbackService feedbackService();
     ItemService itemService();
+    PicService picService();
+
+//    IPresenter.Empty empty();
 
 //    @Component.Builder
 //    interface Builder{

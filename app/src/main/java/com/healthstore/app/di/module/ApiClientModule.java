@@ -6,6 +6,7 @@ import com.healthstore.app.FormedRequestInterceptor;
 import com.healthstore.app.mvp.model.api.FeedbackService;
 import com.healthstore.app.mvp.model.api.ItemService;
 import com.healthstore.app.mvp.model.api.PicService;
+import com.healthstore.app.mvp.model.api.TokenService;
 import com.healthstore.app.mvp.model.api.UserService;
 import com.healthstore.app.mvp.model.api.VipService;
 
@@ -81,6 +82,12 @@ public class ApiClientModule {
     @Singleton
     protected PicService providePictureService(Retrofit retrofit){
         return retrofit.create(PicService.class);
+    }
+
+    @Provides
+    @Singleton
+    protected TokenService provideTokenService(Retrofit retrofit){
+        return retrofit.create(TokenService.class);
     }
 
 }

@@ -30,12 +30,15 @@ import com.healthstore.app.mvp.presenter.UserPresenter;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.grouplist.QMUICommonListItemView;
 import com.qmuiteam.qmui.widget.grouplist.QMUIGroupListView;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.functions.Consumer;
 
 public class UserSettingsFragment extends AppFragment<UserPresenter> implements UserContract.View {
 
@@ -122,7 +125,6 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult - " + requestCode + " - " + resultCode);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-//            headImageView.setImageURI(Uri.fromFile(file));
 //
 //            Bitmap bitmap = data.getParcelableExtra("data");
             //在手机相册中显示刚拍摄的图片
@@ -135,22 +137,28 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
                     imageFile);
             mediaScanIntent.setData(imageUri);
             getActivity().sendBroadcast(mediaScanIntent);
+
+            try {
+                MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), imageFile.getAbsolutePath(), imageFile.getName(), "");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.d(TAG, "onRequestPermissionsResult - " + requestCode + " - " + permissions[0]);
-        Log.d(TAG, "onRequestPermissionsResult - " + requestCode + " - " + grantResults[0]);
-        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            useCamera();
-        } else {
-            // 没有获取 到权限，从新请求，或者关闭app
-//            Toast.makeText(this, "需要存储权限", Toast.LENGTH_SHORT).show();
-        }
-
-    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        Log.d(TAG, "onRequestPermissionsResult - " + requestCode + " - " + permissions[0]);
+//        Log.d(TAG, "onRequestPermissionsResult - " + requestCode + " - " + grantResults[0]);
+//        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//            useCamera();
+//        } else {
+//            // 没有获取 到权限，从新请求，或者关闭app
+////            Toast.makeText(this, "需要存储权限", Toast.LENGTH_SHORT).show();
+//        }
+//
+//    }
 
     void useCamera() {
         // 跳转到系统的拍照界面
@@ -159,8 +167,8 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
         // 这里设置为固定名字 这样就只会只有一张temp图 如果要所有中间图片都保存可以通过时间或者加其他东西设置图片的名称
         // File.separator为系统自带的分隔符 是一个固定的常量
         File imageFile = new File(Environment.getExternalStorageDirectory() + "/images" + "/health.jpeg");
+        imageFile.getParentFile().mkdirs();
         // 获取图片所在位置的Uri路径    *****这里为什么这么做参考问题2*****
-        /*imageUri = Uri.fromFile(new File(mTempPhotoPath));*/
         Uri imageUri = FileProvider.getUriForFile(getContext(),
                 getActivity().getApplicationContext().getPackageName() +".fp",
                 imageFile);
@@ -183,14 +191,12 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
 
         @OnClick(R.id.btn_take_photo)
         void OnClickBtnTakePhoto(){
-            int granted = ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            if (granted == PackageManager.PERMISSION_GRANTED) {
-                //调用相机
-                useCamera();
-            } else {
-                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            }
-
+            new RxPermissions(UserSettingsFragment.this)
+                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+            .subscribe(granted->{
+                if (granted) useCamera();
+                else mAppManager.showToast("未授权不能拍照");
+            });
         }
 
         abstract BottomSheetDialog getBottomDialog();

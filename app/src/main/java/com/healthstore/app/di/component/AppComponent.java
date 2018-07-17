@@ -11,6 +11,7 @@ import com.healthstore.app.di.module.AppModule;
 import com.healthstore.app.mvp.model.api.FeedbackService;
 import com.healthstore.app.mvp.model.api.ItemService;
 import com.healthstore.app.mvp.model.api.PicService;
+import com.healthstore.app.mvp.model.api.TokenService;
 import com.healthstore.app.mvp.model.api.UserService;
 import com.healthstore.app.mvp.model.cache.ItemCache;
 
@@ -40,6 +41,7 @@ public interface AppComponent {
     FeedbackService feedbackService();
     ItemService itemService();
     PicService picService();
+    TokenService tokenService();
 
 //    IPresenter.Empty empty();
 

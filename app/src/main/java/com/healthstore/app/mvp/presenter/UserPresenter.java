@@ -1,34 +1,42 @@
 package com.healthstore.app.mvp.presenter;
 
+import android.util.Log;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.AppManager;
 import com.healthstore.app.di.scope.FragmentScope;
 import com.healthstore.app.mvp.IPresenter;
 import com.healthstore.app.mvp.contract.UserContract;
 import com.healthstore.app.mvp.model.api.TokenService;
+import com.healthstore.app.mvp.model.entity.QnToken;
 import com.healthstore.app.mvp.model.entity.User;
-import com.qiniu.android.http.ResponseInfo;
-import com.qiniu.android.storage.UpCompletionHandler;
 import com.qiniu.android.storage.UploadManager;
 
-import org.json.JSONObject;
-
 import java.io.File;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 @FragmentScope
 public class UserPresenter implements IPresenter {
 
-    @Inject UserContract.View mView;
-    @Inject UserContract.Model mModel;
-    @Inject ObjectMapper objectMapper;
-    @Inject AppManager appManager;
+    @Inject
+    UserContract.View mView;
+    @Inject
+    UserContract.Model mModel;
+    @Inject
+    ObjectMapper objectMapper;
+    @Inject
+    AppManager appManager;
 
-    @Inject TokenService tokenService;
+    @Inject
+    TokenService tokenService;
 
     @Inject
     public UserPresenter() {
@@ -43,27 +51,47 @@ public class UserPresenter implements IPresenter {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> mView.hideLoading())
                 .subscribe(() -> {
+                    mainUser.merge(user);
+                    appManager.getMainUser().setValue(mainUser);
                 });
     }
 
     public void uploadPicture(File file) {
         tokenService.getQiNiuUpToken()
+//                .doOnSubscribe(d -> mView.showLoading())
                 .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.io())
+                .map(qnToken -> qnToken.getUpToken())
+//                .doFinally(() -> mView.hideLoading())
+                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+//                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(token -> {
                     UploadManager uploadManager = new UploadManager();
-                    uploadManager.put(file, "", "", (key, info, response) -> {
-
+                    String upKey = "and-agenda-" + UUID.randomUUID();
+                    String url = "http://omsss06f1.bkt.clouddn.com/" + upKey;
+                    uploadManager.put(file, upKey, token, (key, info, response) -> {
+                        if (info.isOK()) {
+                            Log.d("UserPresenter-uploadPicture", " success");
+                            Log.d("UserPresenter-uploadPicture", "updating user");
+                            User user = new User();
+                            user.setAgendaBackgroundImageUrl(url);
+                            updateMainUser(user);
+                        } else {
+                            Log.d("UserPresenter", "uploadPicture failed");
+                            Log.d("UserPresenter", info.toString());
+                        }
                     }, null);
                 });
 
     }
 
-    @Override public void onStart() {
+    @Override
+    public void onStart() {
 
     }
 
-    @Override public void onDestroy() {
+    @Override
+    public void onDestroy() {
 
     }
 }

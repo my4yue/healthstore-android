@@ -17,6 +17,7 @@ import com.healthstore.app.di.component.DaggerIndexComponent;
 import com.healthstore.app.di.module.IndexModule;
 import com.healthstore.app.mvp.contract.IndexContract;
 import com.healthstore.app.mvp.presenter.IndexPresenter;
+import com.healthstore.app.mvp.ui.fragment.AgendaIndexFragment;
 import com.healthstore.app.mvp.ui.fragment.UserIndexFragment;
 import com.healthstore.app.utils.LogUtils;
 import com.qmuiteam.qmui.alpha.QMUIAlphaImageButton;
@@ -58,7 +59,7 @@ public class IndexActivity extends AppActivity<IndexPresenter> implements IndexC
         tabs.add(tabMe);
 
         fragments = new ArrayList<>();
-        fragments.add(new Fragment());
+        fragments.add(new AgendaIndexFragment());
         fragments.add(new Fragment());
         fragments.add(new Fragment());
         fragments.add(new UserIndexFragment());

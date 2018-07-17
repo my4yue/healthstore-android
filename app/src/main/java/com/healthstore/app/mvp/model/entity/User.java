@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -130,5 +131,19 @@ public class User implements Entity {
             gen.writeString(itemIds);
         }
     }
+
+    public void merge(User user){
+        for (Field field : this.getClass().getDeclaredFields()) {
+            field.setAccessible(true);
+            try {
+                Object obj = field.get(user);
+                if (obj != null) field.set(this, obj);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
 
 }

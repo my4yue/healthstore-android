@@ -127,16 +127,11 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
 //
 //            Bitmap bitmap = data.getParcelableExtra("data");
-            //在手机相册中显示刚拍摄的图片
-            Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
             File imageFile = new File(Environment.getExternalStorageDirectory() + "/images" + "/health.jpeg");
-            // 获取图片所在位置的Uri路径    *****这里为什么这么做参考问题2*****
-            /*imageUri = Uri.fromFile(new File(mTempPhotoPath));*/
             Uri imageUri = FileProvider.getUriForFile(getContext(),
                     getActivity().getApplicationContext().getPackageName() +".fp",
                     imageFile);
-            mediaScanIntent.setData(imageUri);
-            getActivity().sendBroadcast(mediaScanIntent);
+            mPresenter.uploadPicture(imageFile);
 
             try {
                 MediaStore.Images.Media.insertImage(getActivity().getContentResolver(), imageFile.getAbsolutePath(), imageFile.getName(), "");
@@ -145,20 +140,6 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
             }
         }
     }
-
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        Log.d(TAG, "onRequestPermissionsResult - " + requestCode + " - " + permissions[0]);
-//        Log.d(TAG, "onRequestPermissionsResult - " + requestCode + " - " + grantResults[0]);
-//        if (requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//            useCamera();
-//        } else {
-//            // 没有获取 到权限，从新请求，或者关闭app
-////            Toast.makeText(this, "需要存储权限", Toast.LENGTH_SHORT).show();
-//        }
-//
-//    }
 
     void useCamera() {
         // 跳转到系统的拍照界面
@@ -187,16 +168,20 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
         @OnClick(R.id.btn_local)
         void OnClickBtnLocal(){
             System.out.println("click local");
+            getBottomDialog().dismiss();
         }
 
         @OnClick(R.id.btn_take_photo)
         void OnClickBtnTakePhoto(){
             new RxPermissions(UserSettingsFragment.this)
-                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA)
+                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.CAMERA)
             .subscribe(granted->{
                 if (granted) useCamera();
                 else mAppManager.showToast("未授权不能拍照");
             });
+            getBottomDialog().dismiss();
         }
 
         abstract BottomSheetDialog getBottomDialog();

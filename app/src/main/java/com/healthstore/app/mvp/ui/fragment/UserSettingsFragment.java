@@ -137,8 +137,6 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult - " + requestCode + " - " + resultCode);
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-//
-//            Bitmap bitmap = data.getParcelableExtra("data");
             File imageFile = new File(Environment.getExternalStorageDirectory() + "/images" + "/health.jpeg");
             Uri imageUri = FileProvider.getUriForFile(getContext(),
                     getActivity().getApplicationContext().getPackageName() + ".file-provider",

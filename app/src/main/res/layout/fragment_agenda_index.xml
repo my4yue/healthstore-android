@@ -1,11 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/agenda_bg"
+    <com.qmuiteam.qmui.widget.QMUITopBarLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="200dp" />
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/agenda_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:background="@color/qmui_config_color_transparent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <com.qmuiteam.qmui.widget.QMUIProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginHorizontal="30dp"
+                    app:qmui_background_color="@color/qmui_config_color_black"
+                    app:qmui_progress_color="@color/app_green"
+                    android:textColor="@color/qmui_config_color_white"
+                    android:textSize="50sp"
+                    app:qmui_max_value="100"
+                    app:qmui_stroke_round_cap="true"
+                    app:qmui_stroke_width="5dp"
+                    app:qmui_type="type_circle"
+                    app:qmui_value="100"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:background="@color/qmui_config_color_transparent"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2018年7月20日"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="50dp"
+                    android:textColor="@color/qmui_config_color_white"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="星期六"
+                    android:layout_marginTop="100dp"
+                    android:layout_centerHorizontal="true"
+                    android:textColor="@color/qmui_config_color_white"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+
+
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+
 
 </LinearLayout>

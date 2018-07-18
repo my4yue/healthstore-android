@@ -15,6 +15,7 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -69,7 +70,16 @@ public class PhotoManager {
                             .startActivityWithResult(crop.getIntent(fragment.getActivity()));
                 })
                 .filter(result -> result.isOK())
-                .map(result -> createNewPhotoFile(imageFile.getName()));
+                .map(result -> createNewPhotoFile(imageFile.getName()))
+                .map(file->{
+                    try {
+                        MediaStore.Images.Media.insertImage(fragment.getActivity().getContentResolver(),
+                                imageFile.getAbsolutePath(), imageFile.getName(), "");
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    return file;
+                });
     }
 
     public final Observable<File> startPhotoPicker(Fragment fragment) {

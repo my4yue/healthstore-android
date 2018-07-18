@@ -2,4 +2,6 @@
 <resources>
     <item name="btn_save_user" type="id" />
     <item name="btn_save_user_item" type="id" />
+    <item name="btn_agenda_index_add" type="id" />
+
 </resources>

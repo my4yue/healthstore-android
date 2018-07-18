@@ -5,6 +5,7 @@ import android.app.Application;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.healthstore.app.AppDelegate;
 import com.healthstore.app.AppManager;
+import com.healthstore.app.PhotoManager;
 import com.healthstore.app.ImageLoader;
 import com.healthstore.app.di.module.ApiClientModule;
 import com.healthstore.app.di.module.AppModule;
@@ -29,6 +30,7 @@ public interface AppComponent {
     Application application();
 
     AppManager appManager();
+    PhotoManager photoManager();
     ItemCache itemCache();
 
     ObjectMapper objectMapper();

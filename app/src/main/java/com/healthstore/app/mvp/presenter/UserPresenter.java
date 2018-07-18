@@ -58,16 +58,17 @@ public class UserPresenter implements IPresenter {
 
     public void uploadPicture(File file) {
         tokenService.getQiNiuUpToken()
-//                .doOnSubscribe(d -> mView.showLoading())
                 .subscribeOn(Schedulers.io())
+                .doOnSubscribe(d -> mView.showLoading())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .map(qnToken -> qnToken.getUpToken())
 //                .doFinally(() -> mView.hideLoading())
                 .observeOn(AndroidSchedulers.mainThread())
 //                .subscribeOn(AndroidSchedulers.mainThread())
-//                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(token -> {
                     UploadManager uploadManager = new UploadManager();
-                    String upKey = "and-agenda-" + UUID.randomUUID();
+                    String upKey = file.getName();
                     String url = "http://omsss06f1.bkt.clouddn.com/" + upKey;
                     uploadManager.put(file, upKey, token, (key, info, response) -> {
                         if (info.isOK()) {
@@ -79,6 +80,7 @@ public class UserPresenter implements IPresenter {
                         } else {
                             Log.d("UserPresenter", "uploadPicture failed");
                             Log.d("UserPresenter", info.toString());
+                            mView.hideLoading();
                         }
                     }, null);
                 });

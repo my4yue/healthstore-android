@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.healthstore.app.PhotoManager;
 import com.healthstore.app.R;
 import com.healthstore.app.di.component.AppComponent;
 import com.healthstore.app.di.component.DaggerUserComponent;
@@ -35,6 +36,8 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 import java.io.File;
 import java.io.FileNotFoundException;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -44,6 +47,8 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
 
     @BindView(R.id.top_bar) QMUITopBarLayout topBar;
     @BindView(R.id.user_settings) QMUIGroupListView userSettings;
+
+    @Inject PhotoManager photoManager;
 
     @Override int layoutResId() {
         return R.layout.fragment_user_settings;
@@ -58,7 +63,7 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
     }
 
     @OnClick(R.id.btn_logout)
-    public void onClickLogout(){
+    public void onClickLogout() {
 
     }
 
@@ -101,12 +106,19 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
         bottomSheet.getWindow().findViewById(R.id.design_bottom_sheet).setBackgroundResource(android.R.color.transparent);
 
         QMUIGroupListView.newSection(this.getContext())
-                .addItemView(agendaBack, v -> {bottomSheet.show();})
+                .addItemView(agendaBack, v -> {
+                    bottomSheet.show();
+                })
                 .addItemView(itemSetting, v -> mActivityManager.replaceFragment(getContainerId(), new UserItemSelectorFragment()))
-                .addItemView(activityNotify, v -> {})
-                .addItemView(instruction, v -> { mActivityManager.replaceFragment(getContainerId(), new AppInstructionFragment()); })
-                .addItemView(clearCache, v -> {})
-                .addItemView(version, v -> {})
+                .addItemView(activityNotify, v -> {
+                })
+                .addItemView(instruction, v -> {
+                    mActivityManager.replaceFragment(getContainerId(), new AppInstructionFragment());
+                })
+                .addItemView(clearCache, v -> {
+                })
+                .addItemView(version, v -> {
+                })
                 .addTo(userSettings);
 
         activityNotify.getSwitch().setChecked(mAppManager.getMainUser().getValue().isReceiveActivityTrailer());
@@ -129,7 +141,7 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
 //            Bitmap bitmap = data.getParcelableExtra("data");
             File imageFile = new File(Environment.getExternalStorageDirectory() + "/images" + "/health.jpeg");
             Uri imageUri = FileProvider.getUriForFile(getContext(),
-                    getActivity().getApplicationContext().getPackageName() +".fp",
+                    getActivity().getApplicationContext().getPackageName() + ".file-provider",
                     imageFile);
             mPresenter.uploadPicture(imageFile);
 
@@ -141,47 +153,25 @@ public class UserSettingsFragment extends AppFragment<UserPresenter> implements 
         }
     }
 
-    void useCamera() {
-        // 跳转到系统的拍照界面
-        Intent intentToTakePhoto = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // 指定照片存储位置为sd卡本目录下
-        // 这里设置为固定名字 这样就只会只有一张temp图 如果要所有中间图片都保存可以通过时间或者加其他东西设置图片的名称
-        // File.separator为系统自带的分隔符 是一个固定的常量
-        File imageFile = new File(Environment.getExternalStorageDirectory() + "/images" + "/health.jpeg");
-        imageFile.getParentFile().mkdirs();
-        // 获取图片所在位置的Uri路径    *****这里为什么这么做参考问题2*****
-        Uri imageUri = FileProvider.getUriForFile(getContext(),
-                getActivity().getApplicationContext().getPackageName() +".fp",
-                imageFile);
-        //下面这句指定调用相机拍照后的照片存储的路径
-        intentToTakePhoto.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(intentToTakePhoto, 1);
-    }
-
-    abstract class BottomSheetActionList{
+    abstract class BottomSheetActionList {
         @OnClick(R.id.btn_server)
-        void OnClickBtnServer(){
+        void OnClickBtnServer() {
             getBottomDialog().dismiss();
             mActivityManager.replaceFragment(getContainerId(), new PictureSelectorFragment());
         }
 
         @OnClick(R.id.btn_local)
-        void OnClickBtnLocal(){
-            System.out.println("click local");
+        void OnClickBtnLocal() {
             getBottomDialog().dismiss();
+            photoManager.startPhotoPicker(UserSettingsFragment.this)
+                    .subscribe(file -> mPresenter.uploadPicture(file));
         }
 
         @OnClick(R.id.btn_take_photo)
-        void OnClickBtnTakePhoto(){
-            new RxPermissions(UserSettingsFragment.this)
-                    .request(Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.CAMERA)
-            .subscribe(granted->{
-                if (granted) useCamera();
-                else mAppManager.showToast("未授权不能拍照");
-            });
+        void OnClickBtnTakePhoto() {
             getBottomDialog().dismiss();
+            photoManager.startCamera(UserSettingsFragment.this)
+                    .subscribe(file -> mPresenter.uploadPicture(file));
         }
 
         abstract BottomSheetDialog getBottomDialog();

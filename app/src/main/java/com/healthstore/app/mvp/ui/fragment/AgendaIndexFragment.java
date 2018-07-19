@@ -35,6 +35,7 @@ import com.qmuiteam.qmui.widget.QMUIProgressBar;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 import com.qmuiteam.qmui.widget.popup.QMUIBasePopup;
 import com.qmuiteam.qmui.widget.popup.QMUIPopup;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 
@@ -99,7 +100,7 @@ public class AgendaIndexFragment extends AppFragment<AgendaPresenter> implements
         tvDate.setText(DateUtils.formatDate(new Date(), DateUtils.sdfDateCn));
         tvWeekDay.setText(DateUtils.getWeekDay(new Date()).getDescCn());
 
-        mAppManager.getMainUser().observe(this, user -> mImageLoader.loadPicture(getContext(), user.getAgendaBackgroundImageUrl(), agendaBackground));
+        mAppManager.getMainUser().observe(this, user -> Picasso.with(getActivity()).load(user.getAgendaBackgroundImageUrl()).noPlaceholder().fit().into(agendaBackground));
         mAppManager.getMainUser().observe(this, user->tvWatchWord.setText(user.getWatchword()));
     }
 

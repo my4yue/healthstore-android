@@ -38,7 +38,11 @@ public class FormedRequestInterceptor implements Interceptor {
             Map<String, Object> map = objectMapper.readValue(stringBody, Map.class);
 
             stringBody = map.keySet().stream().map(k -> k + "=" + map.get(k).toString() + "&").collect(Collectors.joining());
-            final String newStringBody = stringBody.substring(0, stringBody.lastIndexOf("&"));
+            String newStringBody = stringBody.substring(0, stringBody.lastIndexOf("&"));
+
+            //fix bug watchword大小写问题
+            newStringBody = newStringBody.replaceAll("watchword", "watchWord");
+            final byte[] bytes = newStringBody.getBytes("utf-8");
 
             request = request.newBuilder().patch(new RequestBody() {
                 @Nullable @Override public MediaType contentType() {
@@ -46,7 +50,7 @@ public class FormedRequestInterceptor implements Interceptor {
                 }
 
                 @Override public void writeTo(BufferedSink sink) throws IOException {
-                    sink.write(newStringBody.getBytes("utf-8"));
+                    sink.write(bytes);
                 }
             }).build();
         }

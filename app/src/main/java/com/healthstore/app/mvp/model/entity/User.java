@@ -17,7 +17,6 @@ public class User implements Entity {
 
     Long id;
     String userName;
-    @JsonProperty("watchWord")
     String watchword;
     String wechatOpenId;
     String wechatUnionId;

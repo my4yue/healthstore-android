@@ -26,6 +26,7 @@
         android:showDividers="middle">
 
         <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
+            android:id="@+id/btn_remind_management"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
@@ -33,13 +34,8 @@
             android:text="提醒管理"
             android:textColor="@color/qmui_config_color_white" />
 
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:layout_marginHorizontal="5dp"-->
-        <!--android:background="@color/qmui_config_color_white"/>-->
-
         <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
+            android:id="@+id/btn_activity_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
@@ -47,13 +43,8 @@
             android:text="活动报名"
             android:textColor="@color/qmui_config_color_white" />
 
-        <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:layout_marginHorizontal="5dp"-->
-        <!--android:background="@color/qmui_config_color_white"/>-->
-
         <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
+            android:id="@+id/btn_watchword_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="20dp"
@@ -62,5 +53,4 @@
             android:textColor="@color/qmui_config_color_white" />
 
     </LinearLayout>
-
 </LinearLayout>

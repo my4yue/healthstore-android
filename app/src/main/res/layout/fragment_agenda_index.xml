@@ -63,7 +63,6 @@
                         android:layout_marginTop="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2018年7月20日"
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/qmui_config_color_white"
                         android:textSize="18dp"/>
@@ -71,21 +70,20 @@
                         android:id="@+id/tv_weekday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="星期六"
                         android:layout_gravity="center_horizontal"
                         android:textColor="@color/qmui_config_color_white"
                         android:textSize="16dp"/>
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/tv_watchword"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:layout_marginTop="10dp"
                     android:textSize="20dp"
                     android:textColor="@color/qmui_config_color_white"
-                    android:gravity="center_horizontal"
-                    android:text="@string/app_instruction_title"/>
+                    android:gravity="center_horizontal" />
 
             </LinearLayout>
 

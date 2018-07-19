@@ -50,9 +50,11 @@ public class UserPresenter implements IPresenter {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> mView.hideLoading())
-                .subscribe(() -> {
+                .doOnComplete(()->{
                     mainUser.merge(user);
-                    appManager.getMainUser().setValue(mainUser);
+                    appManager.getMainUser().setValue(mainUser);})
+                .subscribe(() -> {
+//                    mView.onUserUpdated();
                 });
     }
 

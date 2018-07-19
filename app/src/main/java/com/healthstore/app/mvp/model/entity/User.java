@@ -1,5 +1,8 @@
 package com.healthstore.app.mvp.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
@@ -14,6 +17,7 @@ public class User implements Entity {
 
     Long id;
     String userName;
+    @JsonProperty("watchWord")
     String watchword;
     String wechatOpenId;
     String wechatUnionId;
@@ -132,7 +136,13 @@ public class User implements Entity {
         }
     }
 
-    public void merge(User user){
+    private static class WatchwordSerializer extends JsonSerializer<String> {
+        @Override public void serialize(String value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+            gen.writeString("watchWord");
+        }
+    }
+
+    public void merge(User user) {
         for (Field field : this.getClass().getDeclaredFields()) {
             field.setAccessible(true);
             try {

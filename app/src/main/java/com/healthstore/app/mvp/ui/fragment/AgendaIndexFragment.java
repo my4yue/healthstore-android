@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -27,6 +28,8 @@ import com.healthstore.app.di.module.AgendaModule;
 import com.healthstore.app.mvp.contract.AgendaContract;
 import com.healthstore.app.mvp.presenter.AgendaPresenter;
 import com.healthstore.app.utils.DateUtils;
+import com.jakewharton.rxbinding2.view.RxView;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.widget.QMUIProgressBar;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
@@ -52,6 +55,8 @@ public class AgendaIndexFragment extends AppFragment<AgendaPresenter> implements
     TextView tvDate;
     @BindView(R.id.tv_weekday)
     TextView tvWeekDay;
+    @BindView(R.id.tv_watchword)
+    TextView tvWatchWord;
 
     @Override
     int layoutResId() {
@@ -69,21 +74,25 @@ public class AgendaIndexFragment extends AppFragment<AgendaPresenter> implements
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        topBar.setTitle("日程");
-        topBar.addRightImageButton(android.R.drawable.ic_menu_add, R.id.btn_agenda_index_add).setOnClickListener(v -> {
-            View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.layout_agenda_index_popup, null);
+        QMUIPopup popup = new QMUIPopup(getActivity(), QMUIPopup.DIRECTION_BOTTOM){
+            @Override public void setContentView(View root) {
+                super.setContentView(root);
+                mArrowUp.setColorFilter(ContextCompat.getColor(getContext(), R.color.app_color_primary));
+            }
+        };
 
-            QMUIPopup popup = new QMUIPopup(getActivity(), QMUIPopup.DIRECTION_BOTTOM){
-                @Override public void setContentView(View root) {
-                    super.setContentView(root);
-                    mArrowUp.setColorFilter(ContextCompat.getColor(getContext(), R.color.app_color_primary));
-                }
-            };
-            popup.setPositionOffsetYWhenBottom(QMUIDisplayHelper.dpToPx(15));
-            popup.setContentView(inflate);
-            popup.setAnimStyle(QMUIPopup.ANIM_GROW_FROM_CENTER);
-            popup.show(v);
-        });
+        View inflate = LayoutInflater.from(getActivity()).inflate(R.layout.layout_agenda_index_popup, null);
+        inflate.findViewById(R.id.btn_remind_management).setOnClickListener(v->{mActivityManager.replaceFragment(mContainerId, new AppInstructionFragment()); popup.dismiss();});
+        inflate.findViewById(R.id.btn_activity_signup).setOnClickListener(v->{mActivityManager.replaceFragment(mContainerId, new AppInstructionFragment()); popup.dismiss();});
+        inflate.findViewById(R.id.btn_watchword_setting).setOnClickListener(v->{mActivityManager.replaceFragment(mContainerId, new UserWatchWordFragment()); popup.dismiss();});
+
+
+        popup.setPositionOffsetYWhenBottom(QMUIDisplayHelper.dpToPx(15));
+        popup.setContentView(inflate);
+        popup.setAnimStyle(QMUIPopup.ANIM_GROW_FROM_CENTER);
+
+        topBar.setTitle("日程");
+        topBar.addRightImageButton(android.R.drawable.ic_menu_add, R.id.btn_agenda_index_add).setOnClickListener(v -> popup.show(v));
 
         progressBar.setQMUIProgressBarTextGenerator((progressBar, value, maxValue) -> (value * 100 / maxValue) + "%");
         progressBar.setProgress(90);
@@ -91,6 +100,7 @@ public class AgendaIndexFragment extends AppFragment<AgendaPresenter> implements
         tvWeekDay.setText(DateUtils.getWeekDay(new Date()).getDescCn());
 
         mAppManager.getMainUser().observe(this, user -> mImageLoader.loadPicture(getContext(), user.getAgendaBackgroundImageUrl(), agendaBackground));
+        mAppManager.getMainUser().observe(this, user->tvWatchWord.setText(user.getWatchword()));
     }
 
 }

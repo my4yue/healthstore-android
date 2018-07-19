@@ -30,7 +30,6 @@ public class FixVoidRespInterceptor implements Interceptor {
     }
 
     @Override public Response intercept(Chain chain) throws IOException {
-        System.out.println("interceptor - " + Thread.currentThread().getName());
         Response response = chain.proceed(chain.request());
         ResponseBody body = response.body();
         long contentLength = body.contentLength();
@@ -40,7 +39,7 @@ public class FixVoidRespInterceptor implements Interceptor {
             source.request(Long.MAX_VALUE);
             Buffer buffer = source.buffer();
             String stringResp = buffer.clone().readString(Charset.forName("utf-8"));
-
+            stringResp = stringResp.replaceAll("watchword", "watchWord");
             JsonNode tree = objectMapper.readTree(stringResp);
             Log.d("LoggingInterceptor", objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(tree));
             if (tree.isObject()) {

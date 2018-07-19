@@ -12,6 +12,7 @@ import com.healthstore.app.mvp.ui.fragment.UserFeedbackFragment;
 import com.healthstore.app.mvp.ui.fragment.UserIndexFragment;
 import com.healthstore.app.mvp.ui.fragment.UserItemSelectorFragment;
 import com.healthstore.app.mvp.ui.fragment.UserSettingsFragment;
+import com.healthstore.app.mvp.ui.fragment.UserWatchWordFragment;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -25,4 +26,5 @@ public interface UserComponent {
     void inject(UserSettingsFragment userSettingsFragment);
     void inject(UserItemSelectorFragment userItemSelectorFragment);
     void inject(AppInstructionFragment appInstructionFragment);
+    void inject(UserWatchWordFragment userWatchWordFragment);
 }

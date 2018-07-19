@@ -21,6 +21,9 @@
         <item name="QMUICommonListItemViewStyle">@style/App.CommonList.ItemView</item>
         <item name="QMUIGroupListSectionViewStyle">@style/AppGroupListSectionView</item>
 
+        <item name="qmui_popup_bg">@null</item>
+        <item name="qmui_popup_arrow_up_margin_top">0dp</item>
+        <item name="qmui_popup_arrow_down_margin_bottom">0dp</item>
     </style>
 
     <style name="AppGroupListSectionView">

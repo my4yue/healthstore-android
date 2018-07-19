@@ -65,7 +65,7 @@ public class PhotoManager {
                 })
                 .filter(result -> result.isOK())
                 .flatMap(result -> {
-                    Crop crop = Crop.of(uri, uri).withAspect(5, 3);
+                    Crop crop = Crop.of(uri, uri).withAspect(2, 1);
                     return RxActivityResult.with(fragment.getActivity())
                             .startActivityWithResult(crop.getIntent(fragment.getActivity()));
                 })
@@ -93,7 +93,7 @@ public class PhotoManager {
                 .startActivityWithResult(new Intent(Intent.ACTION_GET_CONTENT).setType("image/*"))
                 .filter(result -> result.isOK())
                 .flatMap(result -> {
-                    Crop crop = Crop.of(result.data.getData(), uri).withAspect(5, 3);
+                    Crop crop = Crop.of(result.data.getData(), uri).withAspect(2, 1);
                     return RxActivityResult.with(fragment.getActivity())
                             .startActivityWithResult(crop.getIntent(fragment.getActivity()));
                 })

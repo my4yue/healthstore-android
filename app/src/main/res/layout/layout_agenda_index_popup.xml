@@ -29,28 +29,29 @@
             android:id="@+id/btn_remind_management"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="30dp"
             android:paddingVertical="15dp"
-            android:text="提醒管理"
+            android:text="@string/agenda_index_popup_remind_manage"
             android:textColor="@color/qmui_config_color_white" />
 
         <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
             android:id="@+id/btn_activity_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="30dp"
             android:paddingVertical="15dp"
-            android:text="活动报名"
+            android:text="@string/agenda_index_popup_activity_signup"
             android:textColor="@color/qmui_config_color_white" />
 
         <com.qmuiteam.qmui.alpha.QMUIAlphaTextView
             android:id="@+id/btn_watchword_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="30dp"
             android:paddingVertical="15dp"
-            android:text="口号设置"
+            android:text="@string/agenda_index_popup_watchword_setting"
             android:textColor="@color/qmui_config_color_white" />
 
     </LinearLayout>
+
 </LinearLayout>

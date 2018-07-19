@@ -21,7 +21,7 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:background="@color/qmui_config_color_white"
-        android:hint="口号最多15个字"
+        android:hint="@string/watchword_settings_hint"
         android:padding="5dp"
         android:gravity="bottom"
         android:textSize="20sp" />

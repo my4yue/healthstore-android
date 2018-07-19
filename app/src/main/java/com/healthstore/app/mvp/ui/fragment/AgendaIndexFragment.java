@@ -41,23 +41,14 @@ import java.util.Date;
 
 import butterknife.BindView;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
-
 public class AgendaIndexFragment extends AppFragment<AgendaPresenter> implements AgendaContract.View {
 
-    @BindView(R.id.agenda_bg)
-    ImageView agendaBackground;
-    @BindView(R.id.top_bar)
-    QMUITopBarLayout topBar;
-    @BindView(R.id.progress_bar)
-    QMUIProgressBar progressBar;
-    @BindView(R.id.tv_date)
-    TextView tvDate;
-    @BindView(R.id.tv_weekday)
-    TextView tvWeekDay;
-    @BindView(R.id.tv_watchword)
-    TextView tvWatchWord;
+    @BindView(R.id.agenda_bg) ImageView agendaBackground;
+    @BindView(R.id.top_bar) QMUITopBarLayout topBar;
+    @BindView(R.id.progress_bar) QMUIProgressBar progressBar;
+    @BindView(R.id.tv_date) TextView tvDate;
+    @BindView(R.id.tv_weekday) TextView tvWeekDay;
+    @BindView(R.id.tv_watchword) TextView tvWatchWord;
 
     @Override
     int layoutResId() {
@@ -92,7 +83,7 @@ public class AgendaIndexFragment extends AppFragment<AgendaPresenter> implements
         popup.setContentView(inflate);
         popup.setAnimStyle(QMUIPopup.ANIM_GROW_FROM_CENTER);
 
-        topBar.setTitle("日程");
+        topBar.setTitle(R.string.agenda_title);
         topBar.addRightImageButton(android.R.drawable.ic_menu_add, R.id.btn_agenda_index_add).setOnClickListener(v -> popup.show(v));
 
         progressBar.setQMUIProgressBarTextGenerator((progressBar, value, maxValue) -> (value * 100 / maxValue) + "%");

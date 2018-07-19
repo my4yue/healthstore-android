@@ -3,6 +3,7 @@ package com.healthstore.app.mvp.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.EditText;
 
@@ -32,12 +33,12 @@ public class UserWatchWordFragment extends AppFragment<UserPresenter> implements
 
     @Override public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        topBar.setTitle("口号");
+        topBar.setTitle(R.string.watchword_settings_title);
         topBar.addLeftBackImageButton().setOnClickListener(v->{mActivityManager.popupFragment();});
-        topBar.addRightTextButton(R.string.save, R.id.btn_save_user).setOnClickListener((View v) ->{
+        topBar.addRightTextButton(R.string.confirm, R.id.btn_save_user).setOnClickListener((View v) ->{
             String text =editText.getText().toString();
             if (text.length() <=0 && text.length() > 15) {
-                mAppManager.showToast("口号最多15个字");
+                mAppManager.showToast(getContext().getString(R.string.watchword_settings_hint));
                 return;
             }
 

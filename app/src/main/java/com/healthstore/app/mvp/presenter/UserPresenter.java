@@ -54,7 +54,7 @@ public class UserPresenter implements IPresenter {
                     mainUser.merge(user);
                     appManager.getMainUser().setValue(mainUser);})
                 .subscribe(() -> {
-//                    mView.onUserUpdated();
+                    mView.onUserUpdated(mainUser);
                 });
     }
 

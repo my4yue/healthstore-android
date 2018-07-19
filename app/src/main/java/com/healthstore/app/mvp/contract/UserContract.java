@@ -10,7 +10,7 @@ import io.reactivex.Observable;
 public interface UserContract {
 
     interface View extends IView {
-//        void onUserUpdated(User user);
+        default void onUserUpdated(User user){}
     }
 
     interface Model extends IModel {

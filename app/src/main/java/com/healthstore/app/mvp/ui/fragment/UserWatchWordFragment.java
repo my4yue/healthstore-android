@@ -13,16 +13,9 @@ import com.healthstore.app.di.module.UserModule;
 import com.healthstore.app.mvp.contract.UserContract;
 import com.healthstore.app.mvp.model.entity.User;
 import com.healthstore.app.mvp.presenter.UserPresenter;
-import com.jakewharton.rxbinding2.view.RxView;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qmuiteam.qmui.widget.QMUITopBarLayout;
 
 import butterknife.BindView;
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 
 public class UserWatchWordFragment extends AppFragment<UserPresenter> implements UserContract.View {
 
@@ -51,8 +44,11 @@ public class UserWatchWordFragment extends AppFragment<UserPresenter> implements
             User user = new User();
             user.setWatchword(text);
             mPresenter.updateMainUser(user);
-//            Observable.fromArray().doOnSubscribe(d -> mPresenter.updateMainUser(user)).subscribe(d->mActivityManager.popupFragment());
         });
 
+    }
+
+    @Override public void onUserUpdated(User user) {
+        mActivityManager.popupFragment();
     }
 }

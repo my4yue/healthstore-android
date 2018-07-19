@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="30dp"
-            android:paddingVertical="15dp"
+            android:paddingVertical="10dp"
             android:text="@string/agenda_index_popup_remind_manage"
             android:textColor="@color/qmui_config_color_white" />
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="30dp"
-            android:paddingVertical="15dp"
+            android:paddingVertical="10dp"
             android:text="@string/agenda_index_popup_activity_signup"
             android:textColor="@color/qmui_config_color_white" />
 
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="30dp"
-            android:paddingVertical="15dp"
+            android:paddingVertical="10dp"
             android:text="@string/agenda_index_popup_watchword_setting"
             android:textColor="@color/qmui_config_color_white" />
 

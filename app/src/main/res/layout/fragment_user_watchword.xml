@@ -22,9 +22,9 @@
         android:layout_alignParentBottom="true"
         android:background="@color/qmui_config_color_white"
         android:hint="@string/watchword_settings_hint"
-        android:padding="5dp"
-        android:gravity="bottom"
-        android:textSize="20sp" />
+        android:paddingLeft="5dp"
+        android:gravity="center_vertical"
+        android:textSize="16sp" />
 
 
 </LinearLayout>
